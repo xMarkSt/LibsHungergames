@@ -38,11 +38,12 @@ public class ReflectionManager
         }
         try
         {
-            Class.forName("net.minecraft.util.com.mojang.authlib.GameProfile");
+            Class.forName("com.mojang.authlib.GameProfile");
             gameProfile = true;
         }
         catch (Exception ex)
         {
+            ex.printStackTrace();
         }
     }
 

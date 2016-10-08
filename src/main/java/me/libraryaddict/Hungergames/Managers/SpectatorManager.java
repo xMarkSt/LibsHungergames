@@ -41,7 +41,7 @@ public class SpectatorManager {
     }
 
     public void activateSpectating(final Gamer toSpectate) {
-        if (toSpectate.isSpectator()) return;
+        //if (toSpectate.isSpectator()) return;
         if (SPECTATOR_MODE == null)
             throw new UnsupportedOperationException("Spectating isn't supported in this version of minecraft");
         if (HungergamesApi.getConfigManager().getMainConfig().isShortenedNames() && toSpectate.getPlayer().getPlayerListName().length() <= 14)

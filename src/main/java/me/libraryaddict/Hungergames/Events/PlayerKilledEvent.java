@@ -57,6 +57,8 @@ public class PlayerKilledEvent extends Event implements Cancellable {
         }
         if (killerGamer == null)
             killerGamer = backupKiller;
+
+        HungergamesApi.getSpectatorManager().updateCanSeeSpectators(killed);
     }
 
     public DeathCause getDeathCause() {

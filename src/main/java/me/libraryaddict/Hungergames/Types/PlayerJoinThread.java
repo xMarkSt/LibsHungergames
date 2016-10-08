@@ -138,7 +138,9 @@ public class PlayerJoinThread extends Thread {
         mySqlConnect();
         KitManager kits = HungergamesApi.getKitManager();
         PlayerManager pm = HungergamesApi.getPlayerManager();
+        //Bukkit.getServer().getLogger().info("using uuids: [" + uuids + "] has game profiles: [" + HungergamesApi.getReflectionManager().hasGameProfiles() + "]");
         uuids = uuids && HungergamesApi.getReflectionManager().hasGameProfiles();
+        //Bukkit.getServer().getLogger().info("using uuids: [" + uuids + "] has game profiles: [" + HungergamesApi.getReflectionManager().hasGameProfiles() + "]");
         while (true) {
             if (pm.loadGamer.peek() != null) {
                 final Gamer gamer = pm.loadGamer.poll();
@@ -155,8 +157,11 @@ public class PlayerJoinThread extends Thread {
                     if (isKits) {
                         if (uuids) {
                             r = stmt.executeQuery("SELECT KitName FROM `HGKits` WHERE `uuid` = '" + uuid.toString() + "' ;");
+                            //Bukkit.getServer().getLogger().info("using uuids for kits");
                         } else {
                             r = stmt.executeQuery("SELECT KitName FROM `HGKits` WHERE `Name` = '" + name + "' ;");
+                            //r = stmt.executeQuery("SELECT KitName FROM `HGKits` WHERE `uuid` = '" + uuid.toString() + "' ;");
+                            //Bukkit.getServer().getLogger().info("using names for kits");
                         }
                         r.beforeFirst();
                         while (r.next()) {
@@ -170,6 +175,7 @@ public class PlayerJoinThread extends Thread {
                             r = stmt.executeQuery("SELECT * FROM `HGStats` WHERE `uuid` = '" + uuid.toString() + "' ;");
                         } else {
                             r = stmt.executeQuery("SELECT * FROM `HGStats` WHERE `Name` = '" + name + "' ;");
+                            //r = stmt.executeQuery("SELECT * FROM `HGStats` WHERE `uuid` = '" + uuid.toString() + "' ;");
                         }
                         r.beforeFirst();
                         if (r.next()) {
