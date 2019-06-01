@@ -53,29 +53,29 @@ public class PlayerManager {
     private KitManager kits = HungergamesApi.getKitManager();
     public HashMap<Gamer, Damage> lastDamager = new HashMap<Gamer, Damage>();
     public ConcurrentLinkedQueue<Gamer> loadGamer = new ConcurrentLinkedQueue<Gamer>();
-    private ArrayList<Integer> nonSolid = new ArrayList<Integer>();
+    private ArrayList<Material> nonSolid = new ArrayList<>();
     public ConcurrentLinkedQueue<Stats> saveGamer = new ConcurrentLinkedQueue<Stats>();
     private Iterator<Location> spawnItel;
     private HashMap<Location, Integer[]> spawns = new HashMap<Location, Integer[]>();
 
     public PlayerManager() {
-        nonSolid.add(0);
-        for (int b = 8; b < 12; b++)
-            nonSolid.add(b);
-        nonSolid.add(Material.SNOW.getId());
-        nonSolid.add(Material.LONG_GRASS.getId());
-        nonSolid.add(Material.RED_MUSHROOM.getId());
-        nonSolid.add(Material.RED_ROSE.getId());
-        nonSolid.add(Material.YELLOW_FLOWER.getId());
-        nonSolid.add(Material.BROWN_MUSHROOM.getId());
-        nonSolid.add(Material.SIGN_POST.getId());
-        nonSolid.add(Material.WALL_SIGN.getId());
-        nonSolid.add(Material.FIRE.getId());
-        nonSolid.add(Material.TORCH.getId());
-        nonSolid.add(Material.REDSTONE_WIRE.getId());
-        nonSolid.add(Material.REDSTONE_TORCH_OFF.getId());
-        nonSolid.add(Material.REDSTONE_TORCH_ON.getId());
-        nonSolid.add(Material.VINE.getId());
+        nonSolid.add(Material.AIR);
+        nonSolid.add(Material.WATER);
+        nonSolid.add(Material.LAVA);
+        nonSolid.add(Material.SNOW);
+        nonSolid.add(Material.LEGACY_LONG_GRASS);
+        nonSolid.add(Material.RED_MUSHROOM);
+        nonSolid.add(Material.LEGACY_RED_ROSE);
+        nonSolid.add(Material.LEGACY_YELLOW_FLOWER);
+        nonSolid.add(Material.BROWN_MUSHROOM);
+        nonSolid.add(Material.LEGACY_SIGN_POST);
+        nonSolid.add(Material.WALL_SIGN);
+        nonSolid.add(Material.FIRE);
+        nonSolid.add(Material.TORCH);
+        nonSolid.add(Material.REDSTONE_WIRE);
+        nonSolid.add(Material.LEGACY_REDSTONE_TORCH_OFF);
+        nonSolid.add(Material.LEGACY_REDSTONE_TORCH_ON);
+        nonSolid.add(Material.VINE);
     }
 
     private String addKitToDeathMessage(String deathMessage, Player p) {
@@ -211,8 +211,8 @@ public class PlayerManager {
             p.removePotionEffect(effect.getType());
         p.teleport(p.getWorld().getHighestBlockAt(p.getLocation()).getLocation().clone().add(0, 10, 0));
         p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 40, 9), true);
-        p.sendBlockChange(p.getLocation(), Material.PORTAL.getId(), (byte) 0);
-        p.sendBlockChange(p.getLocation(), Material.AIR.getId(), (byte) 0);
+        p.sendBlockChange(p.getLocation(), Material.NETHER_PORTAL.createBlockData());
+        p.sendBlockChange(p.getLocation(), Material.AIR.createBlockData());
         for (Entity entity : p.getWorld().getEntities()) {
             if (entity instanceof Tameable && ((Tameable) entity).getOwner() == p) {
                 if (entity instanceof Wolf)
@@ -272,10 +272,10 @@ public class PlayerManager {
                 chances++;
                 Location newLoc = new Location(p.getWorld(), spawn.getX() + returnChance(spawnRadius), spawn.getY()
                         + new Random().nextInt(Math.max(1, spawnHeight)), spawn.getZ() + returnChance(spawnRadius));
-                if (nonSolid.contains(newLoc.getBlock().getTypeId())
-                        && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.UP).getTypeId())) {
+                if (nonSolid.contains(newLoc.getBlock().getType())
+                        && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.UP).getType())) {
                     while (newLoc.getBlockY() >= 1
-                            && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.DOWN).getTypeId())) {
+                            && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.DOWN).getType())) {
                         newLoc = newLoc.add(0, -1, 0);
                     }
                     if (newLoc.getBlockY() <= 1)

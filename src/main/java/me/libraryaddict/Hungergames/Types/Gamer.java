@@ -102,7 +102,7 @@ public class Gamer {
     public void clearInventory() {
         getPlayer().getInventory().setArmorContents(new ItemStack[4]);
         getPlayer().getInventory().clear();
-        getPlayer().setItemOnCursor(new ItemStack(0));
+        getPlayer().setItemOnCursor(new ItemStack(Material.AIR));
     }
 
     public long getBalance() {

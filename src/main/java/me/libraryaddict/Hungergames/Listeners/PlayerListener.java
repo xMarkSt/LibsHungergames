@@ -1,6 +1,7 @@
 package me.libraryaddict.Hungergames.Listeners;
 
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import me.libraryaddict.Hungergames.Hungergames;
@@ -33,11 +34,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Damageable;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Tameable;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -45,12 +42,8 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityPortalEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -236,7 +229,7 @@ public class PlayerListener implements Listener {
                     icon.openBuyKitInventory(p);
                     event.setCancelled(true);
                 }
-                if (item.getType() == Material.MUSHROOM_SOUP && config.isMushroomStewEnabled()
+                if (item.getType() == Material.LEGACY_MUSHROOM_SOUP && config.isMushroomStewEnabled()
                         && !item.getItemMeta().hasDisplayName()) {
                     if (p.getHealth() < p.getMaxHealth() || p.getFoodLevel() < 19) {
                         int restores = config.getHeartsMushroomStewHeals();
@@ -292,7 +285,7 @@ public class PlayerListener implements Listener {
                             inv.setItem(48, inv2.getChestplate());
                             inv.setItem(41, inv2.getLeggings());
                             inv.setItem(50, inv2.getBoots());
-                            ItemStack portal = new ItemStack(Material.ENDER_PORTAL);
+                            ItemStack portal = new ItemStack(Material.LEGACY_ENDER_PORTAL);
                             ItemMeta meta = portal.getItemMeta();
                             meta.setDisplayName("");
                             portal.setItemMeta(meta);
@@ -452,7 +445,7 @@ public class PlayerListener implements Listener {
                 loc = loc.getBlock().getLocation().add(0.5, 0.5, 0.5);
                 double bSize = config.getBorderSize();
                 int size = MapLoader.getBorderCheckSize();
-                Entry<Material, Byte> entry = MapLoader.getBorderBlock();
+                Material mat = MapLoader.getBorderBlock();
                 if (config.isRoundedBorder() ? loc.distance(new Location(loc.getWorld(), 0, loc.getY(), 0)) < bSize
                         : (bSize - Math.abs(loc.getX())) >= size || (bSize - Math.abs(loc.getZ())) >= size) {
                     Location loc1 = event.getTo().getBlock().getLocation().add(0.5, 0.5, 0.5);
@@ -476,17 +469,15 @@ public class PlayerListener implements Listener {
                                         boolean particles = MapLoader.isBorderParticles();
                                         if (MapLoader.isSetBorderBlocks()) {
                                             Block b = loc2.getBlock();
-                                            if (MapLoader.isRealBlocks() ? (b.getType() != entry.getKey() || b.getData() != entry
-                                                    .getValue()) : b.getType() == Material.AIR) {
+                                            if (MapLoader.isRealBlocks() ? (b.getType() != mat) : b.getType() == Material.AIR) {
                                                 if (MapLoader.isRealBlocks()) {
                                                     if (particles) {
                                                         particles = false;
                                                         loc.getWorld().playEffect(loc2, Effect.MOBSPAWNER_FLAMES, 0);
                                                     }
-                                                    b.setTypeIdAndData(entry.getKey().getId(), entry.getValue(), false);
+                                                    b.setType(mat, false);
                                                 } else {
-                                                    event.getPlayer().sendBlockChange(loc2, entry.getKey().getId(),
-                                                            entry.getValue());
+                                                    event.getPlayer().sendBlockChange(loc2, mat.createBlockData());
                                                 }
                                             }
                                         }
@@ -506,15 +497,21 @@ public class PlayerListener implements Listener {
     }
 
     @EventHandler
-    public void onPickup(PlayerDropItemEvent event) {
-        if (event.getItemDrop().getItemStack().containsEnchantment(EnchantmentManager.UNDROPPABLE))
-            event.setCancelled(true);
+    public void onDrop(PlayerDropItemEvent event) {
+        for(Enchantment enchantment : event.getItemDrop().getItemStack().getEnchantments().keySet()) {
+            if(enchantment.getKey().equals(EnchantmentManager.UNDROPPABLE.getKey())) {
+                event.setCancelled(true);
+            }
+        }
     }
 
     @EventHandler
-    public void onPickup(PlayerPickupItemEvent event) {
-        if (!pm.getGamer(event.getPlayer()).isAlive())
-            event.setCancelled(true);
+    public void onPickup(EntityPickupItemEvent event) {
+        if(event.getEntity() instanceof Player) {
+            Player p = (Player) event.getEntity();
+            if (!pm.getGamer(p).isAlive())
+                event.setCancelled(true);
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

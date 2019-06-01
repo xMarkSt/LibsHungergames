@@ -8,6 +8,7 @@ import me.libraryaddict.Hungergames.Enchants.*;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import org.bukkit.ChatColor;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,7 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class EnchantmentManager {
 
     private static final int[] BVAL = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
-    private static List<Integer> customEnchants = new ArrayList<Integer>();
+    private static List<NamespacedKey> customEnchants = new ArrayList<>();
 
     // Parallel arrays used in the conversion process.
     private static final String[] RCODE = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
@@ -24,8 +25,8 @@ public class EnchantmentManager {
     public static Enchantment UNLOOTABLE;
 
     static {
-        UNLOOTABLE = new Unlootable(getId());
-        UNDROPPABLE = new Undroppable(getId());
+        UNLOOTABLE = new Unlootable();
+        UNDROPPABLE = new Undroppable();
         try {
             Field field = Enchantment.class.getDeclaredField("acceptingNew");
             field.setAccessible(true);
@@ -39,26 +40,16 @@ public class EnchantmentManager {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        if (Enchantment.getById(UNLOOTABLE.getId()) == null) {
+        if (Enchantment.getByKey(UNLOOTABLE.getKey()) == null) {
             Enchantment.registerEnchantment(UNLOOTABLE);
-            customEnchants.add(UNLOOTABLE.getId());
+            customEnchants.add(UNLOOTABLE.getKey());
             Enchantment.registerEnchantment(UNDROPPABLE);
-            customEnchants.add(UNDROPPABLE.getId());
+            customEnchants.add(UNDROPPABLE.getKey());
         }
-    }
-
-    private static int getId() {
-        for (int i = 1; i <= 1000; i++) {
-            if (Enchantment.getById(i) == null && !customEnchants.contains(i)) {
-                customEnchants.add(i);
-                return i;
-            }
-        }
-        return 0;
     }
 
     public static boolean isNatural(Enchantment ench) {
-        if (customEnchants.contains(ench.getId()))
+        if (customEnchants.contains(ench.getKey()))
             return false;
         return true;
     }

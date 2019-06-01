@@ -30,7 +30,7 @@ public class Salamander extends AbilityListener implements Disableable {
                 .getTimeForInvincibility())
             for (Player p : getMyPlayers()) {
                 Material type = p.getLocation().getBlock().getType();
-                if (type == Material.WATER || type == Material.STATIONARY_WATER) {
+                if (type == Material.WATER || type == Material.LEGACY_STATIONARY_WATER) {
                     p.damage(1);
                 }
             }

@@ -24,6 +24,7 @@ import me.libraryaddict.death.DeathHandler;
 import me.libraryaddict.scoreboard.ScoreboardManager;
 
 import java.io.File;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,6 +42,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.MaterialData;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -206,6 +208,11 @@ public class Hungergames extends JavaPlugin {
         return true;
     }
 
+    public Material convertMaterial(int ID, byte Data) {
+        for(Material i : EnumSet.allOf(Material.class)) if(i.getId() == ID) return Bukkit.getUnsafe().fromLegacy(new MaterialData(i, Data));
+        return null;
+    }
+
     @Override
     public void onDisable() {
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -267,7 +274,7 @@ public class Hungergames extends JavaPlugin {
                     int platformHeight = gen.getSpawnHeight(world.getSpawnLocation(),
                             mapConfiguration.getInt("SpawnPlatformSize"));
                     gen.generatePlatform(world.getSpawnLocation(), platformHeight, mapConfiguration.getInt("SpawnPlatformSize"),
-                            100, spawnGround.getTypeId(), spawnGround.getDurability());
+                            100, spawnGround.getType().createBlockData());
                     world.getSpawnLocation().setY(platformHeight + 2);
                 }
                 world.setDifficulty(Difficulty.HARD);

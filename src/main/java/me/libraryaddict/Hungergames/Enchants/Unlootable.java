@@ -1,13 +1,15 @@
 package me.libraryaddict.Hungergames.Enchants;
 
+import me.libraryaddict.Hungergames.Types.HungergamesApi;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
 public class Unlootable extends Enchantment {
 
-    public Unlootable(int id) {
-        super(id);
+    public Unlootable() {
+        super(new NamespacedKey(HungergamesApi.getHungergames(), "Unlootable"));
     }
 
     @Override

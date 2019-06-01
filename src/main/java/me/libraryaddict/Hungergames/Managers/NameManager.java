@@ -5,6 +5,7 @@ import java.io.IOException;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import org.apache.commons.lang.StringUtils;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
@@ -27,7 +28,7 @@ public class NameManager {
 
     public String getItemName(ItemStack item) {
         if (item == null)
-            item = new ItemStack(0);
+            item = new ItemStack(Material.AIR);
         if (config.contains("" + item.getType().getId()))
             return config.getString("" + item.getType().getId());
         return getName(item.getType().name());

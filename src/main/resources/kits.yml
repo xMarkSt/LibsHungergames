@@ -74,21 +74,21 @@ Kits:
     Description: 'Destroy all the mobs in two hits! The first hit you do will almost kill it. The second hit will finish it off!'
     Free: true
     Price: 0
-    Icon: PORK 0 1
+    Icon: PORKCHOP 0 1
     Ability:
       - Butcher
   Creeper:
     Description: 'Explode with the majestic power of a creeper upon death! Wreck havoc upon thy enemies for daring to kill one as powerful as you! Ruin their day as you destroy any hope and chance they had of winning! However! Theres a chance you will barely explode. Because as we all know. Humans were never meant to explode'
     Free: true
     Price: 0
-    Icon: SULPHUR 0 1
+    Icon: GUNPOWDER 0 1
     Ability:
       - Creeper
   Flower:
     Description: 'While standing under the sun your weapons, armor and tools are repaired. A awesome way to get practically unlimited uses out of your enquipment'
     Free: true
     Price: 0
-    Icon: YELLOW_FLOWER 0 1
+    Icon: DANDELION 0 1
     Ability:
       - Flower
   Ghost: # This kit uses the ability 'PotionLover'. PotionLover is a ability that lets you add your own potions to a kit at the start of the game. For this reason. The potionlover ability has a config you MUST edit if you want to change the values from the default. Or if you rename this kit from ghost. It does NOT automatically modify the config if you change the invincibility time
@@ -128,9 +128,9 @@ Kits:
     Description: 'You are given two teleporters, place them and you can teleport between them! As can other people! If your teleporter is broken, it respawns back in your inventory!'
     Free: true
     Price: 0
-    Icon: MOB_SPAWNER 0 1
+    Icon: LEGACY_MOB_SPAWNER 0 1
     Items: 
-      - MOB_SPAWNER 0 2 Unlootable 1 Name=Teleporter
+      - LEGACY_MOB_SPAWNER 0 2 Unlootable 1 Name=Teleporter
     Ability:
       - Linkage
   Miser:
@@ -172,14 +172,14 @@ Kits:
     Description: 'You have a chance in 3 of skinning another player alive! Once skinned, they will forever have the nameplate ''Default'' for the remainder of the game! Even while spectating! But, all users of this kit are already known as ''Default''!'
     Free: true
     Price: 0
-    Icon: SKULL_ITEM 3 1
+    Icon: PLAYER_HEAD 0 1
     Ability:
       - Skinner
   Rapper:
     Description: 'Right click on a noteblock and give everything in audible range nausea. The nausea doesn''t stack and you are effected by it too! Can you handle your rap?'
     Free: true
     Price: 0
-    Icon: GOLD_RECORD 0 1
+    Icon: MUSIC_DISC_13 0 1
     Items:
       - 'NOTE_BLOCK 0 1 Name=Rapper''s_Studio Unlootable 1'
     Ability:

@@ -89,7 +89,7 @@ public class Linkage extends AbilityListener implements Disableable {
     public String teleporterTooManyPlaced = ChatColor.BLUE + "Too many teleporters placed.";
 
     private void addItem(Player p) {
-        ItemStack item = new ItemStack(Material.MOB_SPAWNER);
+        ItemStack item = new ItemStack(Material.LEGACY_MOB_SPAWNER);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(teleporterName);
         item.setItemMeta(meta);
@@ -109,7 +109,7 @@ public class Linkage extends AbilityListener implements Disableable {
     public void onBlockDestroy(BlockBreakEvent event) {
         if (event.isCancelled())
             return;
-        if (event.getBlock().getType() == Material.MOB_SPAWNER) {
+        if (event.getBlock().getType() == Material.LEGACY_MOB_SPAWNER) {
             Teleport teleport = this.getTeleport(event.getBlock());
             if (teleport == null)
                 return;
@@ -145,7 +145,7 @@ public class Linkage extends AbilityListener implements Disableable {
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block clicked = event.getClickedBlock();
-            if (clicked.getType() == Material.MOB_SPAWNER) {
+            if (clicked.getType() == Material.LEGACY_MOB_SPAWNER) {
                 Player p = event.getPlayer();
                 if (pm.getGamer(p).isAlive()) {
                     Teleport teleport = getTeleport(clicked);
@@ -165,7 +165,7 @@ public class Linkage extends AbilityListener implements Disableable {
         Player p = event.getPlayer();
         Block block = event.getBlock();
         if (pm.getGamer(p).isAlive() && hasAbility(p)) {
-            if (block.getType() == Material.MOB_SPAWNER) {
+            if (block.getType() == Material.LEGACY_MOB_SPAWNER) {
                 Teleport teleport = teleporters.get(p);
                 if (teleport == null) {
                     teleport = new Teleport(p);

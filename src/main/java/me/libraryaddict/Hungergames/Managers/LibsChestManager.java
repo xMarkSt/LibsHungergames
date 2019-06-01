@@ -25,21 +25,21 @@ public class LibsChestManager implements ChestManager {
         randomItems.add(new RandomItem(5, Material.DIAMOND_LEGGINGS, 0, 1, 1));
         randomItems.add(new RandomItem(5, Material.DIAMOND_SWORD, 0, 1, 1));
         randomItems.add(new RandomItem(5, Material.DIAMOND_PICKAXE, 0, 1, 1));
-        randomItems.add(new RandomItem(20, Material.MUSHROOM_SOUP, 0, 1, 7));
+        randomItems.add(new RandomItem(20, Material.LEGACY_MUSHROOM_SOUP, 0, 1, 7));
         randomItems.add(new RandomItem(20, Material.LAVA_BUCKET, 0, 1, 1));
         randomItems.add(new RandomItem(20, Material.WATER_BUCKET, 0, 1, 1));
         randomItems.add(new RandomItem(20, Material.BUCKET, 0, 1, 1));
-        randomItems.add(new RandomItem(20, Material.WEB, 0, 1, 2));
+        randomItems.add(new RandomItem(20, Material.LEGACY_WEB, 0, 1, 2));
         randomItems.add(new RandomItem(20, Material.ENDER_PEARL, 0, 1, 6));
         randomItems.add(new RandomItem(20, Material.FLINT_AND_STEEL, 0, 1, 1));
-        randomItems.add(new RandomItem(20, Material.GRILLED_PORK, 0, 1, 20));
+        randomItems.add(new RandomItem(20, Material.LEGACY_GRILLED_PORK, 0, 1, 20));
         randomItems.add(new RandomItem(20, Material.COOKED_BEEF, 0, 1, 20));
         randomItems.add(new RandomItem(20, Material.COOKED_CHICKEN, 0, 1, 20));
         randomItems.add(new RandomItem(20, Material.BREAD, 0, 1, 20));
         randomItems.add(new RandomItem(20, Material.BOW, 0, 1, 1));
         randomItems.add(new RandomItem(20, Material.ARROW, 0, 1, 20));
         randomItems.add(new RandomItem(20, Material.TNT, 0, 1, 20));
-        randomItems.add(new RandomItem(20, Material.EXP_BOTTLE, 0, 1, 10));
+        randomItems.add(new RandomItem(20, Material.LEGACY_EXP_BOTTLE, 0, 1, 10));
         randomItems.add(new RandomItem(10, Material.POTION, 16420, 1, 1)); // Poisons
         randomItems.add(new RandomItem(10, Material.POTION, 16425, 1, 1)); // Strength
         randomItems.add(new RandomItem(10, Material.POTION, 16418, 1, 1)); // Speed

@@ -25,6 +25,8 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -78,14 +80,17 @@ public class LibsFeastManager implements Listener {
                 for (int yLevel = y; yLevel > 0; yLevel--) {
                     b = b.getRelative(BlockFace.DOWN);
                     if (y - 1 >= yLevel)
-                        gen.setBlockFast(b, feastInside.getTypeId(), feastInside.getDurability());
+                        gen.setBlockFast(b, feastInside.getType().createBlockData());
                     else
-                        gen.setBlockFast(b, feastBlock.getTypeId(), feastBlock.getDurability());
+                        gen.setBlockFast(b, feastBlock.getType().createBlockData());
                 }
                 if (x == 0 && z == 0) {
-                    gen.setBlockFast(block, Material.ENCHANTMENT_TABLE.getId(), (byte) 0);
-                    gen.setBlockFast(block.getRelative(BlockFace.DOWN), feastInside.getTypeId(),
-                            (feastInside.getType() == Material.TNT ? 1 : feastInside.getDurability()));
+                    gen.setBlockFast(block, Material.LEGACY_ENCHANTMENT_TABLE.createBlockData());
+                    BlockData blockData = Bukkit.createBlockData(feastInside.getType());
+                    if(blockData instanceof TNT) {
+                        ((TNT) blockData).setUnstable(true);
+                    }
+                    gen.setBlockFast(block.getRelative(BlockFace.DOWN), blockData);
                 } else if (Math.abs(x + z) % 2 == 0) {
                     gen.addToProcessedBlocks(block);
                     boolean loadChunk = !b.getWorld().isChunkLoaded(b.getChunk().getX(), b.getChunk().getZ());
@@ -98,7 +103,7 @@ public class LibsFeastManager implements Listener {
                     cm.fillChest(chest.getInventory());
                     chest.update();
                 } else
-                    gen.setBlockFast(block, feastBlock.getTypeId(), feastBlock.getDurability());
+                    gen.setBlockFast(block, feastBlock.getType().createBlockData());
             }
         }
         World world = Bukkit.getWorlds().get(0);
@@ -111,10 +116,9 @@ public class LibsFeastManager implements Listener {
 
     public void generatePlatform(Location loc, int chestLayers, int platformSize) {
         ItemStack item = HungergamesApi.getConfigManager().getFeastConfig().getFeastGroundBlock();
-        gen.generatePlatform(loc, chestLayers, platformSize, item.getType(), item.getDurability());
+        gen.generatePlatform(loc, chestLayers, platformSize, item.getType().createBlockData());
         if (config.isPillarsEnabled())
-            gen.generatePillars(loc, platformSize, config.getPillarCorners().getTypeId(), config.getPillarCorners()
-                    .getDurability(), config.getPillarInsides().getTypeId(), config.getPillarInsides().getDurability());
+            gen.generatePillars(loc, platformSize, config.getPillarCorners().getType().createBlockData(), config.getPillarInsides().getType().createBlockData());
     }
 
     public Location getFeastLocation() {

@@ -155,14 +155,14 @@ public class KitManager {
             if (items.length <= 0)
                 return new ItemStack[] { null };
             for (int i = 0; i < items.length; i++) {
-                int id = hg.isNumeric(args[0]) ? Integer.parseInt(args[0])
+                Material mat = hg.isNumeric(args[0]) ? hg.convertMaterial(Integer.parseInt(args[0]), (byte)0)
                         : (Material.getMaterial(args[0].toUpperCase()) == null ? Material.AIR : Material.getMaterial(args[0]
-                                .toUpperCase())).getId();
-                if (id == 0) {
+                                .toUpperCase()));
+                if (mat == Material.AIR) {
                     System.out.print(String.format(cm.getUnrecognisedItemId(), args[0]));
                     return new ItemStack[] { null };
                 }
-                ItemStack item = new ItemStack(id, (int) amount, (short) Integer.parseInt(args[1]));
+                ItemStack item = new ItemStack(mat, (int) amount, (short) Integer.parseInt(args[1]));
                 boolean setUnbreakable = false;
                 for (int no = 3; no < args.length; no++) {
                     String argString = args[no];

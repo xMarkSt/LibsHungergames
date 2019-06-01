@@ -33,8 +33,8 @@ public class InventoryManager {
 
     private TranslationConfig tm = HungergamesApi.getConfigManager().getTranslationsConfig();
 
-    public ItemStack generateItem(int id, int dataValue, String name, List<String> lore) {
-        ItemStack item = new ItemStack(id, 1, (short) dataValue);
+    public ItemStack generateItem(Material material, String name, List<String> lore) {
+        ItemStack item = new ItemStack(material, 1);
         ItemMeta meta = item.getItemMeta();
         if (name != null) {
             meta.setDisplayName(ChatColor.WHITE + name);
@@ -49,22 +49,18 @@ public class InventoryManager {
         return item;
     }
 
-    public ItemStack generateItem(int type, int dataValue, String name, String[] lore) {
-        return generateItem(type, dataValue, name, Arrays.asList(lore));
+    public ItemStack generateItem(Material type, String name, String[] lore) {
+        return generateItem(type, name, Arrays.asList(lore));
     }
 
-    public ItemStack generateItem(Material type, int dataValue, String name, List<String> lore) {
-        return generateItem(type.getId(), dataValue, name, lore);
-    }
-
-    public ItemStack generateItem(Material type, int dataValue, String name, String... lore) {
-        return generateItem(type.getId(), dataValue, name, Arrays.asList(lore));
+    public ItemStack generateItem2(Material type, String name, String... lore) {
+        return generateItem(type, name, Arrays.asList(lore));
     }
 
     public ItemStack getBuyKit() {
         if (buyKitIcon == null) {
             ItemStack item = HungergamesApi.getConfigManager().getMainConfig().getBuyKitIcon();
-            buyKitIcon = generateItem(item.getType(), item.getDurability(), HungergamesApi.getConfigManager()
+            buyKitIcon = generateItem(item.getType(), HungergamesApi.getConfigManager()
                     .getTranslationsConfig().getItemBuyKitName(), HungergamesApi.getConfigManager().getTranslationsConfig()
                     .getItemBuyKitDescription());
             buyKitIcon.addEnchantment(EnchantmentManager.UNDROPPABLE, 1);
@@ -75,7 +71,7 @@ public class InventoryManager {
     public ItemStack getKitSelector() {
         if (kitSelector == null) {
             ItemStack item = HungergamesApi.getConfigManager().getMainConfig().getKitSelectorIcon();
-            kitSelector = generateItem(item.getType(), item.getDurability(), HungergamesApi.getConfigManager()
+            kitSelector = generateItem(item.getType(), HungergamesApi.getConfigManager()
                     .getTranslationsConfig().getItemKitSelectorName(), HungergamesApi.getConfigManager().getTranslationsConfig()
                     .getItemKitSelectorDescription());
             kitSelector.addEnchantment(EnchantmentManager.UNDROPPABLE, 1);
@@ -91,10 +87,10 @@ public class InventoryManager {
                 config.getBuyKitInventorySize());
         inv.setTitle(tm.getBuyKitMenuTitle());
         ItemStack kItem = HungergamesApi.getConfigManager().getMainConfig().getBuyKitItemBack();
-        inv.setBackPage(generateItem(kItem.getType(), kItem.getDurability(), tm.getItemBuyKitInventoryBackName(),
+        inv.setBackPage(generateItem(kItem.getType(), tm.getItemBuyKitInventoryBackName(),
                 tm.getItemBuyKitBackDescription()));
         kItem = HungergamesApi.getConfigManager().getMainConfig().getBuyKitItemForwards();
-        inv.setForwardsPage(generateItem(kItem.getType(), kItem.getDurability(), tm.getItemBuyKitInventoryForwardsName(),
+        inv.setForwardsPage(generateItem(kItem.getType(), tm.getItemBuyKitInventoryForwardsName(),
                 tm.getItemBuyKitForwardsDescription()));
         {
             ArrayList<ItemStack> nonOwned = new ArrayList<ItemStack>();
@@ -132,10 +128,10 @@ public class InventoryManager {
                 config.getKitSelectorInventorySize());
         inv.setTitle(tm.getSelectKitInventoryTitle());
         ItemStack kItem = HungergamesApi.getConfigManager().getMainConfig().getKitSelectorBack();
-        inv.setBackPage(generateItem(kItem.getType(), kItem.getDurability(), tm.getItemKitSelectorBackName(),
+        inv.setBackPage(generateItem(kItem.getType(), tm.getItemKitSelectorBackName(),
                 tm.getItemKitSelectorBackDescription()));
         kItem = HungergamesApi.getConfigManager().getMainConfig().getKitSelectorForward();
-        inv.setForwardsPage(generateItem(kItem.getType(), kItem.getDurability(), tm.getItemKitSelectorForwardsName(),
+        inv.setForwardsPage(generateItem(kItem.getType(), tm.getItemKitSelectorForwardsName(),
                 tm.getItemKitSelectorForwardsDescription()));
         {
             ArrayList<ItemStack> kitItems = new ArrayList<ItemStack>();
@@ -169,10 +165,10 @@ public class InventoryManager {
             return;
         HGPageInventory inv = new HGPageInventory(InventoryType.SPECTATOR, p, true, 54);
         ItemStack item = HungergamesApi.getConfigManager().getMainConfig().getSpectatorItemBack();
-        inv.setBackPage(generateItem(item.getType(), item.getDurability(), tm.getItemSpectatorInventoryBackName(),
+        inv.setBackPage(generateItem(item.getType(), tm.getItemSpectatorInventoryBackName(),
                 tm.getItemSpectatorInventoryBackDescription()));
         item = HungergamesApi.getConfigManager().getMainConfig().getSpectatorItemForwards();
-        inv.setForwardsPage(generateItem(item.getType(), item.getDurability(), tm.getItemSpectatorInventoryForwardsName(),
+        inv.setForwardsPage(generateItem(item.getType(), tm.getItemSpectatorInventoryForwardsName(),
                 tm.getItemSpectatorInventoryForwardsDescription()));
         inv.setPages(specHeads);
         inv.setTitle(tm.getSpectatorInventoryTitle());
@@ -201,7 +197,7 @@ public class InventoryManager {
                 heads.add(head);
             } else {
                 Gamer gamer = pm.getGamer(name);
-                ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+                ItemStack head = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (short) 3);
                 Kit kit = kits.getKitByPlayer(gamer.getPlayer());
                 if (kit != null && kit.getIcon() != null)
                     head = kit.getIcon();

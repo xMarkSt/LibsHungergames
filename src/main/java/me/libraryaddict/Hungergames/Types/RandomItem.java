@@ -17,9 +17,7 @@ public class RandomItem implements ConfigurationSerializable {
     public static RandomItem deserialize(Map<String, Object> args) {
         Material type = null;
         Object obj = args.get("Item Type");
-        if (obj instanceof Integer)
-            type = Material.getMaterial((Integer) obj);
-        else if (obj instanceof String)
+        if (obj instanceof String)
             type = Material.getMaterial((String) obj);
         else
             throw new RuntimeException(obj + " is not a valid item type");
@@ -39,40 +37,15 @@ public class RandomItem implements ConfigurationSerializable {
     private int minItems, maxItems;
 
     /**
-     * @param Chance
-     *            of being used, out of a hundred. 0 = no chance
-     * @param ID
-     *            of the item
-     * @param Datavalue
-     *            of the item
-     * @param Min
-     *            amount of the item
-     * @param Max
-     *            amount of the item
+     * @param newChance Chance of being used, out of a hundred. 0 = no chance
+     * @param material Material of the item
+     * @param newData Datavalue of the item
+     * @param newMin Min amount of the item
+     * @param newMax Max amount of the item
      */
-    public RandomItem(double newChance, int newId, int newData, int newMin, int newMax) {
+    public RandomItem(double newChance, Material material, int newData, int newMin, int newMax) {
         chanceOfItemStackAppearing = newChance;
-        itemType = Material.getMaterial(newId);
-        itemData = (short) newData;
-        minItems = newMin;
-        maxItems = newMax;
-    }
-
-    /**
-     * @param Chance
-     *            of being used, out of a hundred. 0 = no chance
-     * @param Material
-     *            of the item
-     * @param Datavalue
-     *            of the item
-     * @param Min
-     *            amount of the item
-     * @param Max
-     *            amount of the item
-     */
-    public RandomItem(double newChance, Material mat, int newData, int newMin, int newMax) {
-        chanceOfItemStackAppearing = newChance;
-        itemType = mat;
+        itemType = material;
         itemData = (short) newData;
         minItems = newMin;
         maxItems = newMax;

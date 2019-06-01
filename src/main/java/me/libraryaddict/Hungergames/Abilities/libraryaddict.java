@@ -26,7 +26,7 @@ public class libraryaddict extends AbilityListener implements Disableable {
                 && hasAbility(event.getPlayer())) {
             item.setAmount(item.getAmount() - 1);
             if (item.getAmount() == 0)
-                event.getPlayer().setItemInHand(new ItemStack(0));
+                event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
             final Item explodingBook = event.getPlayer().getWorld()
                     .dropItem(event.getPlayer().getEyeLocation(), new ItemStack(Material.BOOK));
             explodingBook.setVelocity(event.getPlayer().getEyeLocation().getDirection().multiply(0.6));

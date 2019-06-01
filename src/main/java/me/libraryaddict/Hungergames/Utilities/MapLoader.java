@@ -6,11 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Random;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -24,10 +20,11 @@ import me.libraryaddict.Hungergames.Hungergames;
 import me.libraryaddict.Hungergames.Configs.LoggerConfig;
 import me.libraryaddict.Hungergames.Configs.MainConfig;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
+import org.bukkit.material.MaterialData;
 
 public class MapLoader {
     @Getter
-    private static Entry<Material, Byte> borderBlock;
+    private static Material borderBlock;
     @Getter
     private static int borderCheckSize;
     @Getter
@@ -82,6 +79,11 @@ public class MapLoader {
         }
         input.close();
         output.close();
+    }
+
+    public static Material convertMaterial(int ID, byte Data) {
+        for(Material i : EnumSet.allOf(Material.class)) if(i.getId() == ID) return Bukkit.getUnsafe().fromLegacy(new MaterialData(i, Data));
+        return null;
     }
 
     public static void loadMap() {
@@ -148,18 +150,9 @@ public class MapLoader {
             borderCheckSize = config.getInt("Border.CheckSize");
             realBlocks = config.getBoolean("Border.RealBlocks");
             String str = config.getString("Border.Block");
-            String[] spl = str.split(":");
-            Material mat = Material.GLASS;
-            byte b = (byte) 0;
-            try {
-                mat = Material.getMaterial(Integer.parseInt(spl[0]));
-            } catch (NumberFormatException ex) {
-                mat = Material.valueOf(spl[0].toUpperCase());
-            }
-            if (spl.length > 1) {
-                b = Byte.parseByte(spl[1]);
-            }
-            borderBlock = new HashMap.SimpleEntry(mat, b);
+
+            borderBlock = parseMaterialString(str);
+
             String worldToUse = HungergamesApi.getReflectionManager().getPropertiesConfig("level-name", "world");
             if (HungergamesApi.getConfigManager().getMainConfig().isUseOwnWorld()) {
                 worldToUse = "LibsHungergamesWorld";
@@ -187,6 +180,24 @@ public class MapLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static Material parseMaterialString(String str) {
+        String[] spl = str.split(":");
+        Material mat = Material.GLASS;
+        byte data = (byte) 0;
+        try {
+            if(spl.length > 1) {
+                data = Byte.parseByte(spl[1]);
+            }
+            mat = convertMaterial(Integer.parseInt(spl[0]), data);
+        } catch (NumberFormatException ex) {
+            mat = Material.valueOf(spl[0].toUpperCase());
+            if(data != 0) {
+                mat = convertMaterial(mat.getId(), data);
+            }
+        }
+        return mat;
     }
 
     private static void loadMap(File mapDir, File dest, YamlConfiguration config) throws IOException {
@@ -261,18 +272,7 @@ public class MapLoader {
                 borderCheckSize = config.getInt("Border.CheckSize", config2.getInt("Border.CheckSize"));
                 realBlocks = config.getBoolean("Border.RealBlocks", config2.getBoolean("Border.RealBlocks"));
                 String str = config.getString("Border.Block", config2.getString("Border.Block"));
-                String[] spl = str.split(":");
-                Material mat = Material.GLASS;
-                byte b = (byte) 0;
-                try {
-                    mat = Material.getMaterial(Integer.parseInt(spl[0]));
-                } catch (NumberFormatException ex) {
-                    mat = Material.valueOf(spl[0].toUpperCase());
-                }
-                if (spl.length > 1) {
-                    b = Byte.parseByte(spl[1]);
-                }
-                borderBlock = new HashMap.SimpleEntry(mat, b);
+                borderBlock = parseMaterialString(str);
             }
             File spawnsFile = new File(worldConfig.getParentFile(), "spawns.yml");
             System.out.print(tm.getLoadSpawnsConfig());

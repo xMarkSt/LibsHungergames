@@ -37,7 +37,7 @@ public class TopStatsCommand implements CommandExecutor {
 
     public TopStatsCommand() {
         {
-            topStatsHeadItem = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+            topStatsHeadItem = new ItemStack(Material.PLAYER_HEAD, 1);
             ItemMeta meta = topStatsHeadItem.getItemMeta();
             meta.setDisplayName(ChatColor.GOLD + "%Name%");
             ArrayList<String> lore = new ArrayList<String>();

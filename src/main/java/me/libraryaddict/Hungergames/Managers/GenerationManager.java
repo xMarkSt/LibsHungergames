@@ -21,26 +21,12 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GenerationManager {
-    private class BlockInfo {
-        byte data;
-
-        Material id;
-
-        @SuppressWarnings("unused")
-        public BlockInfo(int id, byte data) {
-            this.id = Material.getMaterial(id);
-            this.data = data;
-        }
-
-        public BlockInfo(Material id, byte data) {
-            this.id = id;
-            this.data = data;
-        }
-    }
 
     private boolean background;
     private BukkitRunnable chunkGeneratorRunnable;
@@ -49,7 +35,7 @@ public class GenerationManager {
     private List<BlockFace> faces = new ArrayList<BlockFace>();
     private List<BlockFace> jungleFaces = new ArrayList<BlockFace>();
     private LoggerConfig loggerConfig = HungergamesApi.getConfigManager().getLoggerConfig();
-    private HashMap<Block, BlockInfo> queued = new HashMap<Block, BlockInfo>();
+    private HashMap<Block, BlockData> queued = new HashMap<Block, BlockData>();
     private BukkitRunnable setBlocksRunnable;
 
     public GenerationManager() {
@@ -136,8 +122,7 @@ public class GenerationManager {
     /**
      * Generate pillars..
      */
-    public void generatePillars(Location loc, int radius, int pillarCornerId, int pillarCornerData, int pillarInsideId,
-            int pillarInsideData) {
+    public void generatePillars(Location loc, int radius, BlockData pillarCorner, BlockData pillarInside) {
         int[] cords = new int[] { (int) (-radius / 2.5), (int) (radius / 2.5) };
         int pillarRadius = Math.round(radius / 8);
         for (int px = 0; px <= 1; px++)
@@ -148,9 +133,9 @@ public class GenerationManager {
                                 z + loc.getBlockZ() + cords[pz]);
                         while (!isSolid(b) || b.isLiquid()) {
                             if (Math.abs(x) == pillarRadius && Math.abs(z) == pillarRadius)
-                                setBlockFast(b, pillarCornerId, (short) pillarCornerData);
+                                setBlockFast(b, pillarCorner);
                             else
-                                setBlockFast(b, pillarInsideId, (short) pillarInsideData);
+                                setBlockFast(b, pillarInside);
                             b = b.getRelative(BlockFace.DOWN);
                         }
                     }
@@ -164,8 +149,7 @@ public class GenerationManager {
      * @param lowestLevel
      * @param radius
      */
-    public void generatePlatform(Location loc, int lowestLevel, int radius, int yHeight, int platformGround,
-            short platformDurability) {
+    public void generatePlatform(Location loc, int lowestLevel, int radius, int yHeight, BlockData platformGround) {
         loc.setY(lowestLevel + 1);
         double radiusSquared = radius * radius;
         // Sets to air and generates to stand on
@@ -176,10 +160,10 @@ public class GenerationManager {
                     for (int y = yHeight; y >= loc.getBlockY() - 1; y--) {
                         Block b = loc.getWorld().getBlockAt(radiusX + loc.getBlockX(), y, radiusZ + loc.getBlockZ());
                         if (y >= loc.getBlockY()) {// If its less then 0
-                            setBlockFast(b, 0, (byte) 0);
+                            setBlockFast(b, Material.AIR.createBlockData());
                         } else {
                             // Generates to stand on
-                            setBlockFast(b, platformGround, platformDurability);
+                            setBlockFast(b, platformGround);
                         }
                     }
                 }
@@ -193,12 +177,13 @@ public class GenerationManager {
      * @param loc
      * @param lowestLevel
      * @param radius
+     * @param groundType
      */
-    public void generatePlatform(Location loc, int lowestLevel, int radius, Material groundType, int groundDurability) {
+    public void generatePlatform(Location loc, int lowestLevel, int radius, BlockData groundType) {
         int yHeight = radius;
         if (yHeight < 4)
             yHeight = 4;
-        generatePlatform(loc, lowestLevel, radius, yHeight, groundType.getId(), (short) groundDurability);
+        generatePlatform(loc, lowestLevel, radius, yHeight, groundType);
     }
 
     public int getHeight(ArrayList<Integer> heights, int radius) {
@@ -289,18 +274,18 @@ public class GenerationManager {
         switch (b.getType()) {
         case AIR:
         case VINE:
-        case LOG:
-        case LEAVES:
+        case LEGACY_LOG:
+        case LEGACY_LEAVES:
         case SNOW:
-        case LONG_GRASS:
-        case WOOD:
+        case LEGACY_LONG_GRASS:
+        case LEGACY_WOOD:
         case COBBLESTONE:
-        case RED_ROSE:
-        case YELLOW_FLOWER:
+        case LEGACY_RED_ROSE:
+        case LEGACY_YELLOW_FLOWER:
         case BROWN_MUSHROOM:
         case RED_MUSHROOM:
-        case HUGE_MUSHROOM_1:
-        case HUGE_MUSHROOM_2:
+        case LEGACY_HUGE_MUSHROOM_1:
+        case LEGACY_HUGE_MUSHROOM_2:
             return false;
         default:
             return true;
@@ -312,37 +297,33 @@ public class GenerationManager {
                 .getConfigManager().getFeastConfig().isRemoveTrees()) ? jungleFaces : faces)) {
             Block newB = b.getRelative(face);
             // If the blocks are useless decoration
-            if (newB.getType() == Material.LEAVES || newB.getType() == Material.LOG || newB.getType() == Material.VINE) {
+            if (newB.getBlockData() instanceof Leaves || newB.getType() == Material.LEGACY_LOG || newB.getType() == Material.VINE) {
                 // If they are not queued for deletion and are not marked as dont process
                 if (!queued.containsKey(newB) && !dontProcessBlocks.contains(newB)) {
                     // Set it to air
-                    setBlockFast(newB, 0, (byte) 0);
+                    setBlockFast(newB, Material.AIR.createBlockData());
                     // If the ground under it is dirt cos it was a tree or something
                     if (newB.getRelative(BlockFace.DOWN).getType() == Material.DIRT) {
                         // Get the block and check if it can turn it to grass
                         newB = newB.getRelative(BlockFace.DOWN);
                         if (!queued.containsKey(newB) && !dontProcessBlocks.contains(newB)) {
-                            setBlockFast(newB, Material.GRASS.getId(), (byte) 0);
+                            setBlockFast(newB, Material.GRASS.createBlockData());
                         }
                     }
                 }
                 // Else remove floating snow.
             } else if (newB.getType() == Material.SNOW && face == BlockFace.UP) {
                 if (!queued.containsKey(newB) && !dontProcessBlocks.contains(newB)) {
-                    setBlockFast(newB, 0, (byte) 0);
+                    setBlockFast(newB,  Material.AIR.createBlockData());
                 }
             }
         }
     }
 
-    public void setBlockFast(Block b, int typeId, short s) {
-        setBlockFast(b, Material.getMaterial(typeId), s);
-    }
-
-    public void setBlockFast(Block b, Material type, short s) {
+    public void setBlockFast(Block b, BlockData blockData) {
         try {
-            if (!dontProcessBlocks.contains(b) && (b.getType() != type || b.getData() != (byte) s)) {
-                queued.put(b, new BlockInfo(type, (byte) s));
+            if (!dontProcessBlocks.contains(b) && (b.getBlockData() != blockData)) {
+                queued.put(b, blockData);
                 if (setBlocksRunnable == null) {
                     setBlocksRunnable = new BukkitRunnable() {
                         public void run() {
@@ -352,11 +333,11 @@ public class GenerationManager {
                                 cancel();
                             }
                             int i = 0;
-                            HashMap<Block, BlockInfo> toDo = new HashMap<Block, BlockInfo>();
+                            HashMap<Block, BlockData> toDo = new HashMap<Block, BlockData>();
                             for (Block b : queued.keySet()) {
                                 if (i++ >= 200)
                                     break;
-                                if (b.getType() == queued.get(b).id && b.getData() == queued.get(b).data)
+                                if (b.getBlockData() == queued.get(b))
                                     i--;
                                 toDo.put(b, queued.get(b));
                                 if (dontProcessBlocks.contains(b))
@@ -372,13 +353,13 @@ public class GenerationManager {
                             }
                             for (Block b : toDo.keySet()) {
                                 queued.remove(b);
-                                if (b.getType() == toDo.get(b).id && b.getData() == toDo.get(b).data
+                                if (b.getBlockData() == toDo.get(b)
                                         || dontProcessBlocks.contains(b))
                                     continue;
                                 // boolean loadChunk = !b.getWorld().isChunkLoaded(b.getChunk().getX(), b.getChunk().getZ());
                                 // if (!loadChunk)
                                 // b.getWorld().loadChunk(b.getChunk().getX(), b.getChunk().getZ());
-                                b.setTypeIdAndData(toDo.get(b).id.getId(), toDo.get(b).data, true);
+                                b.setBlockData(toDo.get(b), true);
                                 // if (!loadChunk)
                                 // b.getWorld().unloadChunk(b.getChunk().getX(), b.getChunk().getZ());
                                 removeLeaves(b);

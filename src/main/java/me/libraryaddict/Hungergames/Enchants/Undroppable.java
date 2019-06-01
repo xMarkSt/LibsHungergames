@@ -1,13 +1,15 @@
 package me.libraryaddict.Hungergames.Enchants;
 
+import me.libraryaddict.Hungergames.Types.HungergamesApi;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 
 public class Undroppable extends Enchantment {
 
-    public Undroppable(int id) {
-        super(id);
+    public Undroppable() {
+        super(new NamespacedKey(HungergamesApi.getHungergames(), "Undroppable"));
     }
 
     @Override

@@ -35,16 +35,16 @@ public class StatsCommand implements CommandExecutor {
 
     public StatsCommand() {
         InventoryManager inv = HungergamesApi.getInventoryManager();
-        statsIcons[0] = inv.generateItem(Material.PAPER, 0, ChatColor.GOLD + "%Name%'s stats", ChatColor.RED
+        statsIcons[0] = inv.generateItem2(Material.PAPER, ChatColor.GOLD + "%Name%'s stats", ChatColor.RED
                 + "Ranked at #%Rank%");
-        statsIcons[1] = inv.generateItem(Material.IRON_SWORD, 0, ChatColor.GOLD + "Total kills", "", ChatColor.BLUE + "Kills:"
+        statsIcons[1] = inv.generateItem2(Material.IRON_SWORD, ChatColor.GOLD + "Total kills", "", ChatColor.BLUE + "Kills:"
                 + ChatColor.AQUA + " %Kills%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA + " #%KillsRanking%");
-        statsIcons[2] = inv.generateItem(Material.WOOD_SWORD, 0, ChatColor.GOLD + "Best killstreak", "", ChatColor.BLUE
+        statsIcons[2] = inv.generateItem2(Material.LEGACY_WOOD_SWORD, ChatColor.GOLD + "Best killstreak", "", ChatColor.BLUE
                 + "Best Killstreak:" + ChatColor.AQUA + " %Killstreak%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA
                 + " #%KillstreakRanking%");
-        statsIcons[3] = inv.generateItem(Material.DIAMOND, 0, ChatColor.GOLD + "%Name%'s wins", "", ChatColor.BLUE + "Wins:"
+        statsIcons[3] = inv.generateItem2(Material.DIAMOND, ChatColor.GOLD + "%Name%'s wins", "", ChatColor.BLUE + "Wins:"
                 + ChatColor.AQUA + " %Wins%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA + " #%WinsRanking%");
-        statsIcons[4] = inv.generateItem(Material.SKULL_ITEM, 2, ChatColor.GOLD + "%Name%'s losses", "", ChatColor.BLUE
+        statsIcons[4] = inv.generateItem2(Material.ZOMBIE_HEAD, ChatColor.GOLD + "%Name%'s losses", "", ChatColor.BLUE
                 + "Losses:" + ChatColor.AQUA + " %Losses%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA + " #%LossesRanking%");
     }
 
