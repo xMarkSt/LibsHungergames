@@ -57,14 +57,14 @@ BadKits:
   - NoCheatBypass
 Kits:
   Bombtastic:
-    Description: 'Don''t you just hate creepers? The way they creep up, hiss and explode! Well its time to take your revenge! Rip their guts out on death! Bombtastic gives you 50% chance of the creeper dropping tnt. Its time, to take revenge!'
+    Description: 'Don''t you just hate creepers? The way they creep up, hiss and explode! Well, it''s time to take your revenge! Rip their guts out on death! Bombtastic gives you 50% chance of the creeper dropping tnt. Its time, to take revenge!'
     Free: true
     Price: 0
     Icon: TNT 0 1
     Ability:
       - Bombtastic
   Bourne:
-    Description: 'This kit scrambles enemy players compasses when they get within 25 blocks of Jason Bourne'
+    Description: 'This kit scrambles enemy players compasses when they get within 25 blocks of you, aka Jason Bourne'
     Free: true
     Price: 0
     Icon: COMPASS 0 1
