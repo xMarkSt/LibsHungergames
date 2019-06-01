@@ -57,7 +57,7 @@ BadKits:
   - NoCheatBypass
 Kits:
   Bombtastic:
-    Description: 'Don''t you just hate creepers? The way they creep up, hiss and explode! Well, it''s time to take your revenge! Rip their guts out on death! Bombtastic gives you 50% chance of the creeper dropping tnt. Its time, to take revenge!'
+    Description: 'Don''t you just hate creepers? The way they creep up, hiss and explode! Well, it''s time to take your revenge! Bombtastic gives you 50% chance of the creeper dropping tnt.'
     Free: true
     Price: 0
     Icon: TNT 0 1
@@ -71,21 +71,21 @@ Kits:
     Ability:
       - Bourne
   Butcher:
-    Description: 'Destroy all the mobs in two hits! The first hit you do will almost kill it. The second hit will finish it off!'
+    Description: 'Kill all mobs in two hits! The first hit will almost kill it. The second hit will finish it off!'
     Free: true
     Price: 0
     Icon: PORKCHOP 0 1
     Ability:
       - Butcher
   Creeper:
-    Description: 'Explode with the majestic power of a creeper upon death! Wreck havoc upon thy enemies for daring to kill one as powerful as you! Ruin their day as you destroy any hope and chance they had of winning! However! Theres a chance you will barely explode. Because as we all know. Humans were never meant to explode'
+    Description: 'Explode with the majestic power of a creeper upon death! Ruin your enemies'' day as you destroy any hope and chance they had of winning! However! Theres a chance you will barely explode. Because as we all know. Humans were never meant to explode'
     Free: true
     Price: 0
     Icon: GUNPOWDER 0 1
     Ability:
       - Creeper
   Flower:
-    Description: 'While standing under the sun your weapons, armor and tools are repaired. A awesome way to get practically unlimited uses out of your enquipment'
+    Description: 'While standing under the sun your weapons, armor and tools are repaired. A awesome way to get practically unlimited uses out of your equipment'
     Free: true
     Price: 0
     Icon: DANDELION 0 1
@@ -115,7 +115,7 @@ Kits:
     Ability:
       - Icicles
   libraryaddict:
-    Description: 'Its no secret some people love books. Infact, some people love books to the extent where they turn them into exploding weapons! Using this kit you have 5 exploding books, chuck it like a grenade and RUN'
+    Description: 'Using this kit you have 5 exploding books, chuck them like a grenade and RUN FOR YOUR LIFE!'
     Free: true
     Price: 0
     Icon: BOOK 0 1
@@ -134,7 +134,7 @@ Kits:
     Ability:
       - Linkage
   Miser:
-    Description: 'Sick of people killing you and grabbing your hard earned loot? Worry no more! Revenge from the grave! They ain''t getting any of your loot! You no longer drop your items on death!'
+    Description: 'Sick of people killing you and grabbing your hard earned loot? With this kit, you no longer drop your items on death.'
     Free: true
     Price: 0
     Icon: CHEST 0 1
@@ -155,21 +155,21 @@ Kits:
     Ability:
       - Permissive
   Pussy:
-    Description: 'Ever get accused of being a pussy? Now you can rub it in! Turn into a kitty cat after 10 seconds of sprinting! Wonderful if you want to become hard to see while you are doing your trademark pussying!'
+    Description: 'You turn into a kitty cat after 10 seconds of sprinting. The ultimate kit for all of the pussies out there.'
     Free: true
     Price: 0
     Icon: POTION 16418 1
     Ability:
       - Pussy
   Salamander:
-    Description: 'The salamander kit is a very nice kit for those who just cannot stop burning! You no longer must fear fire! Swim in lava! Bath in flames! However you seem to be allergic to water..'
+    Description: 'With this kit, you must no longer fear fire! Swim in lava! Bath in flames! However, you seem to be allergic to water..'
     Free: true
     Price: 0
     Icon: LAVA_BUCKET 0 1
     Ability:
       - Salamander
   Skinner:
-    Description: 'You have a chance in 3 of skinning another player alive! Once skinned, they will forever have the nameplate ''Default'' for the remainder of the game! Even while spectating! But, all users of this kit are already known as ''Default''!'
+    Description: 'You have a chance of 1 in 3 of skinning another player alive! Once skinned, they will forever have the nameplate ''Default'' for the remainder of the game! Even while spectating! But, all users of this kit are already known as ''Default''!'
     Free: true
     Price: 0
     Icon: PLAYER_HEAD 0 1
@@ -192,7 +192,7 @@ Kits:
     Ability:
       - Surprise
   Zombifier:
-    Description: 'Your father was a human and your mother was a zombie. I don''t care to discuss how your parents got together and the moral ramifications. It happened, lets leave it at that. When you sneak, everyone can agree you take after your mothers side, your armor even seems to disappear! But when standing tall, you look like your father! If you didn''t understand that, you turn into a zombie when sneaking.'
+    Description: 'You turn into a zombie when sneaking. Ideal for ambushing your enemies!'
     Free: true
     Price: 0
     Icon: ROTTEN_FLESH 0 1
