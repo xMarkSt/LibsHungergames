@@ -59,7 +59,7 @@ public abstract class AbilityListener implements Listener {
         if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()) {
             String itemName = item.getItemMeta().getDisplayName();
             String stripped = ChatColor.stripColor(itemName);
-            if (!itemName.equals(stripped) && stripped.equals(ChatColor.stripColor(displayName))) {
+            if (stripped.equals(ChatColor.stripColor(displayName))) {
                 return true;
             }
         }
