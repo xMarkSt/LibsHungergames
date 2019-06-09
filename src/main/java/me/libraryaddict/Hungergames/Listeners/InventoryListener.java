@@ -31,9 +31,9 @@ public class InventoryListener implements Listener {
                 String name = item.getItemMeta().getDisplayName();
                 Kit kit = null;
                 for (Kit k : kits.getKits()) {
-                    String kitName = ChatColor.WHITE + k.getName()
+                    String kitName = k.getName()
                             + (kits.ownsKit(p, k) ? tm.getInventoryOwnKit() : tm.getInventoryDontOwnKit());
-                    if (kitName.equals(name)) {
+                    if (kitName.equalsIgnoreCase(name)) {
                         kit = k;
                         break;
                     }
