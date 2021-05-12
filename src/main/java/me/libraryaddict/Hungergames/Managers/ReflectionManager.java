@@ -19,6 +19,7 @@ public class ReflectionManager
     private Class itemClass;
     private Properties properties;
     private Object propertyManager;
+    private Object serverSettings;
 
     public ReflectionManager()
     {
@@ -27,7 +28,8 @@ public class ReflectionManager
             commandMap = (SimpleCommandMap) Bukkit.getServer().getClass().getDeclaredMethod("getCommandMap")
                     .invoke(Bukkit.getServer());
             Object obj = Bukkit.getServer().getClass().getDeclaredMethod("getServer").invoke(Bukkit.getServer());
-            propertyManager = obj.getClass().getDeclaredMethod("getPropertyManager").invoke(obj);
+            serverSettings = obj.getClass().getField("propertyManager").get(obj); //DedicatedServerSettings
+            propertyManager = serverSettings.getClass().getDeclaredMethod("getProperties").invoke(serverSettings); // DedicatedServerProperties
             properties = (Properties) propertyManager.getClass().getField("properties").get(propertyManager);
             currentVersion = propertyManager.getClass().getPackage().getName();
             itemClass = getCraftClass("inventory.CraftItemStack");
@@ -135,7 +137,7 @@ public class ReflectionManager
     {
         try
         {
-            propertyManager.getClass().getMethod("savePropertiesFile").invoke(propertyManager);
+            serverSettings.getClass().getMethod("save").invoke(serverSettings);
         }
         catch (Exception e)
         {
