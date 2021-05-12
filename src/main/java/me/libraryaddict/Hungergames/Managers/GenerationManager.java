@@ -13,11 +13,7 @@ import me.libraryaddict.Hungergames.Configs.LoggerConfig;
 import me.libraryaddict.Hungergames.Types.CordPair;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -131,7 +127,7 @@ public class GenerationManager {
                     for (int z = -pillarRadius; z <= pillarRadius; z++) {
                         Block b = loc.getWorld().getBlockAt(x + loc.getBlockX() + cords[px], loc.getBlockY() - 2,
                                 z + loc.getBlockZ() + cords[pz]);
-                        while (!isSolid(b) || b.isLiquid()) {
+                        while (!b.getType().isSolid() || b.isLiquid()) {
                             if (Math.abs(x) == pillarRadius && Math.abs(z) == pillarRadius)
                                 setBlockFast(b, pillarCorner);
                             else
@@ -213,10 +209,10 @@ public class GenerationManager {
     }
 
     private Block getHighest(Block b) {
-        if (isSolid(b)) {
+        if (b.getType().isSolid()) {
             return b;
         }
-        while (b.getY() > 0 && !isSolid(b.getRelative(BlockFace.DOWN)))
+        while (b.getY() > 0 && !b.getRelative(BlockFace.DOWN).getType().isSolid())
             b = b.getRelative(BlockFace.DOWN);
         return b.getRelative(BlockFace.DOWN);
     }
@@ -270,34 +266,12 @@ public class GenerationManager {
         return chunkGeneratorRunnable != null && !background;
     }
 
-    private boolean isSolid(Block b) {
-        switch (b.getType()) {
-        case AIR:
-        case VINE:
-        case LEGACY_LOG:
-        case LEGACY_LEAVES:
-        case SNOW:
-        case LEGACY_LONG_GRASS:
-        case LEGACY_WOOD:
-        case COBBLESTONE:
-        case LEGACY_RED_ROSE:
-        case LEGACY_YELLOW_FLOWER:
-        case BROWN_MUSHROOM:
-        case RED_MUSHROOM:
-        case LEGACY_HUGE_MUSHROOM_1:
-        case LEGACY_HUGE_MUSHROOM_2:
-            return false;
-        default:
-            return true;
-        }
-    }
-
     private void removeLeaves(Block b) {
         for (BlockFace face : ((b.getBiome() == Biome.JUNGLE || b.getBiome() == Biome.JUNGLE_HILLS || !HungergamesApi
                 .getConfigManager().getFeastConfig().isRemoveTrees()) ? jungleFaces : faces)) {
             Block newB = b.getRelative(face);
             // If the blocks are useless decoration
-            if (newB.getBlockData() instanceof Leaves || newB.getType() == Material.LEGACY_LOG || newB.getType() == Material.VINE) {
+            if (newB.getBlockData() instanceof Leaves || Tag.LOGS.isTagged(newB.getType()) || newB.getType() == Material.VINE) {
                 // If they are not queued for deletion and are not marked as dont process
                 if (!queued.containsKey(newB) && !dontProcessBlocks.contains(newB)) {
                     // Set it to air

@@ -39,7 +39,7 @@ public class StatsCommand implements CommandExecutor {
                 + "Ranked at #%Rank%");
         statsIcons[1] = inv.generateItem2(Material.IRON_SWORD, ChatColor.GOLD + "Total kills", "", ChatColor.BLUE + "Kills:"
                 + ChatColor.AQUA + " %Kills%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA + " #%KillsRanking%");
-        statsIcons[2] = inv.generateItem2(Material.LEGACY_WOOD_SWORD, ChatColor.GOLD + "Best killstreak", "", ChatColor.BLUE
+        statsIcons[2] = inv.generateItem2(Material.WOODEN_SWORD, ChatColor.GOLD + "Best killstreak", "", ChatColor.BLUE
                 + "Best Killstreak:" + ChatColor.AQUA + " %Killstreak%", ChatColor.BLUE + "Ranking:" + ChatColor.AQUA
                 + " #%KillstreakRanking%");
         statsIcons[3] = inv.generateItem2(Material.DIAMOND, ChatColor.GOLD + "%Name%'s wins", "", ChatColor.BLUE + "Wins:"

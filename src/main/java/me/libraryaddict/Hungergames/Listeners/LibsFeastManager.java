@@ -85,7 +85,7 @@ public class LibsFeastManager implements Listener {
                         gen.setBlockFast(b, feastBlock.getType().createBlockData());
                 }
                 if (x == 0 && z == 0) {
-                    gen.setBlockFast(block, Material.LEGACY_ENCHANTMENT_TABLE.createBlockData());
+                    gen.setBlockFast(block, Material.ENCHANTING_TABLE.createBlockData());
                     BlockData blockData = Bukkit.createBlockData(feastInside.getType());
                     if(blockData instanceof TNT) {
                         ((TNT) blockData).setUnstable(true);

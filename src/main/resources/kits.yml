@@ -128,9 +128,9 @@ Kits:
     Description: 'You are given two teleporters, place them and you can teleport between them! As can other people! If your teleporter is broken, it respawns back in your inventory!'
     Free: true
     Price: 0
-    Icon: LEGACY_MOB_SPAWNER 0 1
+    Icon: SPAWNER 0 1
     Items: 
-      - LEGACY_MOB_SPAWNER 0 2 Unlootable 1 Name=Teleporter
+      - SPAWNER 0 2 Unlootable 1 Name=Teleporter
     Ability:
       - Linkage
   Miser:

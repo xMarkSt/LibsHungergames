@@ -247,9 +247,9 @@ public class PlayerManager {
                 Location newLoc = new Location(p.getWorld(), spawn.getX() + returnChance(spawnRadius), spawn.getY()
                         + new Random().nextInt(Math.max(1, spawnHeight)), spawn.getZ() + returnChance(spawnRadius));
                 if (newLoc.getBlock().getType().isSolid()
-                        && newLoc.getBlock().getRelative(BlockFace.UP).getType().isSolid()) {
+                        && !newLoc.getBlock().getRelative(BlockFace.UP).getType().isSolid()) {
                     while (newLoc.getBlockY() >= 1
-                            && newLoc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
+                            && !newLoc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
                         newLoc = newLoc.add(0, -1, 0);
                     }
                     if (newLoc.getBlockY() <= 1)

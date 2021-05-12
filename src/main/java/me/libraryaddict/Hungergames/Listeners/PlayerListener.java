@@ -229,7 +229,7 @@ public class PlayerListener implements Listener {
                     icon.openBuyKitInventory(p);
                     event.setCancelled(true);
                 }
-                if (item.getType() == Material.LEGACY_MUSHROOM_SOUP && config.isMushroomStewEnabled()
+                if (item.getType() == Material.MUSHROOM_STEW && config.isMushroomStewEnabled()
                         && !item.getItemMeta().hasDisplayName()) {
                     if (p.getHealth() < p.getMaxHealth() || p.getFoodLevel() < 19) {
                         int restores = config.getHeartsMushroomStewHeals();
@@ -285,7 +285,7 @@ public class PlayerListener implements Listener {
                             inv.setItem(48, inv2.getChestplate());
                             inv.setItem(41, inv2.getLeggings());
                             inv.setItem(50, inv2.getBoots());
-                            ItemStack portal = new ItemStack(Material.LEGACY_ENDER_PORTAL);
+                            ItemStack portal = new ItemStack(Material.END_PORTAL);
                             ItemMeta meta = portal.getItemMeta();
                             meta.setDisplayName("");
                             portal.setItemMeta(meta);
