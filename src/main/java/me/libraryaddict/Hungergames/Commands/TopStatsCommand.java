@@ -52,7 +52,7 @@ public class TopStatsCommand implements CommandExecutor {
             topStatsHeadItem.setItemMeta(meta);
         }
         {
-            topStatsForwardsIcon = new ItemStack(Material.SIGN);
+            topStatsForwardsIcon = new ItemStack(Material.OAK_SIGN);
             ItemMeta meta = topStatsForwardsIcon.getItemMeta();
             meta.setDisplayName(ChatColor.GOLD + "Fowards");
             ArrayList<String> lore = new ArrayList<String>();
@@ -62,7 +62,7 @@ public class TopStatsCommand implements CommandExecutor {
             topStatsForwardsIcon.setItemMeta(meta);
         }
         {
-            topStatsBackIcon = new ItemStack(Material.SIGN);
+            topStatsBackIcon = new ItemStack(Material.OAK_SIGN);
             ItemMeta meta = topStatsBackIcon.getItemMeta();
             meta.setDisplayName(ChatColor.GOLD + "Back");
             ArrayList<String> lore = new ArrayList<String>();

@@ -330,11 +330,10 @@ public class PlayerListener implements Listener {
                     break;
                 }
         }
-        if (event.getView().getTopInventory().getTitle() != null
-                && event.getWhoClicked().hasMetadata("ViewingSpec")
+        if (event.getWhoClicked().hasMetadata("ViewingSpec")
                 && tm.getTitleOfPlayerInventoryOpenedBySpectator()
                         .replace("%Player%", event.getWhoClicked().getMetadata("ViewingSpec").get(0).asString())
-                        .equals(event.getView().getTopInventory().getTitle())) {
+                        .equals(event.getView().getTitle())) {
             event.setCancelled(true);
         }
     }

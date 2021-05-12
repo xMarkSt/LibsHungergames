@@ -22,6 +22,7 @@ public abstract class ClickInventory implements Listener {
     protected TranslationConfig tm = HungergamesApi.getConfigManager().getTranslationsConfig();
     protected static JavaPlugin plugin = HungergamesApi.getHungergames();
     protected Inventory currentInventory;
+    protected String currentInventoryTitle;
     protected boolean inventoryInUse;
     private boolean modifiable;
     private Player player;

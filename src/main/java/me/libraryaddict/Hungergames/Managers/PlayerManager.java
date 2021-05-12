@@ -13,13 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Ocelot;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Tameable;
-import org.bukkit.entity.Wolf;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -57,26 +51,6 @@ public class PlayerManager {
     public ConcurrentLinkedQueue<Stats> saveGamer = new ConcurrentLinkedQueue<Stats>();
     private Iterator<Location> spawnItel;
     private HashMap<Location, Integer[]> spawns = new HashMap<Location, Integer[]>();
-
-    public PlayerManager() {
-        nonSolid.add(Material.AIR);
-        nonSolid.add(Material.WATER);
-        nonSolid.add(Material.LAVA);
-        nonSolid.add(Material.SNOW);
-        nonSolid.add(Material.LEGACY_LONG_GRASS);
-        nonSolid.add(Material.RED_MUSHROOM);
-        nonSolid.add(Material.LEGACY_RED_ROSE);
-        nonSolid.add(Material.LEGACY_YELLOW_FLOWER);
-        nonSolid.add(Material.BROWN_MUSHROOM);
-        nonSolid.add(Material.LEGACY_SIGN_POST);
-        nonSolid.add(Material.WALL_SIGN);
-        nonSolid.add(Material.FIRE);
-        nonSolid.add(Material.TORCH);
-        nonSolid.add(Material.REDSTONE_WIRE);
-        nonSolid.add(Material.LEGACY_REDSTONE_TORCH_OFF);
-        nonSolid.add(Material.LEGACY_REDSTONE_TORCH_ON);
-        nonSolid.add(Material.VINE);
-    }
 
     private String addKitToDeathMessage(String deathMessage, Player p) {
         String playerKit = cm.getKillMessageNoKit();
@@ -218,7 +192,7 @@ public class PlayerManager {
                 if (entity instanceof Wolf)
                     ((Wolf) entity).setSitting(true);
                 else if (entity instanceof Ocelot)
-                    ((Ocelot) entity).setSitting(true);
+                    ((Cat) entity).setSitting(true);
                 else
                     entity.remove();
             }
@@ -272,10 +246,10 @@ public class PlayerManager {
                 chances++;
                 Location newLoc = new Location(p.getWorld(), spawn.getX() + returnChance(spawnRadius), spawn.getY()
                         + new Random().nextInt(Math.max(1, spawnHeight)), spawn.getZ() + returnChance(spawnRadius));
-                if (nonSolid.contains(newLoc.getBlock().getType())
-                        && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.UP).getType())) {
+                if (newLoc.getBlock().getType().isSolid()
+                        && newLoc.getBlock().getRelative(BlockFace.UP).getType().isSolid()) {
                     while (newLoc.getBlockY() >= 1
-                            && nonSolid.contains(newLoc.getBlock().getRelative(BlockFace.DOWN).getType())) {
+                            && newLoc.getBlock().getRelative(BlockFace.DOWN).getType().isSolid()) {
                         newLoc = newLoc.add(0, -1, 0);
                     }
                     if (newLoc.getBlockY() <= 1)

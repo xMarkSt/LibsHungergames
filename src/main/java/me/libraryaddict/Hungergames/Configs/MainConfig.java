@@ -2,17 +2,14 @@ package me.libraryaddict.Hungergames.Configs;
 
 import java.io.File;
 import java.io.IOException;
+
+import lombok.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 import me.libraryaddict.Hungergames.Hungergames;
 import me.libraryaddict.Hungergames.Managers.ReflectionManager;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
@@ -36,8 +33,8 @@ public class MainConfig extends BaseConfig {
 
     private ItemStack buyKitIcon = new ItemStack(Material.NETHER_STAR);
     private int buyKitInventorySize = 54;
-    private ItemStack buyKitItemBack = new ItemStack(Material.SIGN);
-    private ItemStack buyKitItemForwards = new ItemStack(Material.SIGN);
+    private ItemStack buyKitItemBack = new ItemStack(Material.OAK_SIGN);
+    private ItemStack buyKitItemForwards = new ItemStack(Material.OAK_SIGN);
     /**
      * Does the plugin check for updates..
      */
@@ -109,7 +106,7 @@ public class MainConfig extends BaseConfig {
     /**
      * What item do I use for the kit selectors back button
      */
-    private ItemStack kitSelectorBack = new ItemStack(Material.SIGN);
+    private ItemStack kitSelectorBack = new ItemStack(Material.OAK_SIGN);
     /**
      * Do I give the players a kit selector when they join the game
      */
@@ -117,7 +114,7 @@ public class MainConfig extends BaseConfig {
     /**
      * What item do I use for the kit selectors forward button
      */
-    private ItemStack kitSelectorForward = new ItemStack(Material.SIGN);
+    private ItemStack kitSelectorForward = new ItemStack(Material.OAK_SIGN);
     /**
      * What item opens the kit selector menu
      */
@@ -203,12 +200,12 @@ public class MainConfig extends BaseConfig {
     /**
      * Spectators menu back item
      */
-    private ItemStack spectatorItemBack = new ItemStack(Material.SIGN);
+    private ItemStack spectatorItemBack = new ItemStack(Material.OAK_SIGN);
 
     /**
      * Spectators menu forwards item
      */
-    private ItemStack spectatorItemForwards = new ItemStack(Material.SIGN);
+    private ItemStack spectatorItemForwards = new ItemStack(Material.OAK_SIGN);
     /**
      * Does the spectator menu work for them to teleport around
      */

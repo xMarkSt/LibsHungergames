@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 import me.libraryaddict.Hungergames.Types.RandomItem;
 
@@ -17,6 +18,7 @@ import org.bukkit.configuration.MemorySection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 @Data
+@NoArgsConstructor
 public abstract class BaseConfig {
     protected YamlConfiguration config;
     private File configFile;

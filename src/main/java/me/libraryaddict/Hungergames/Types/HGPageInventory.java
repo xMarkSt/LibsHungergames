@@ -139,6 +139,7 @@ public class HGPageInventory extends ClickInventory {
         if (currentInventory == null) {
             ItemStack[] pageItems = pages.get(Math.max(getCurrentPage(), 0));
             currentInventory = Bukkit.createInventory(null, pageItems.length, getPageTitle());
+            currentInventoryTitle = getPageTitle();
             currentInventory.setContents(pageItems);
         }
         openInv();
@@ -167,8 +168,9 @@ public class HGPageInventory extends ClickInventory {
             if (isInventoryInUse()) {
                 ItemStack[] pageItems = pages.get(getCurrentPage());
                 if (pageItems.length != currentInventory.getSize()
-                        || !currentInventory.getTitle().equalsIgnoreCase(getPageTitle())) {
+                        || !currentInventoryTitle.equalsIgnoreCase(getPageTitle())) {
                     currentInventory = Bukkit.createInventory(null, pageItems.length, getPageTitle());
+                    currentInventoryTitle = getPageTitle();
                     currentInventory.setContents(pageItems);
                     openInv();
                 } else {
