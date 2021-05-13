@@ -28,7 +28,7 @@ public class InventoryListener implements Listener {
             Player p = event.getPlayer();
             InventoryType type = event.getInventory().getType();
             if (type == InventoryType.KIT) {
-                String name = item.getItemMeta().getDisplayName();
+                String name = ChatColor.stripColor(item.getItemMeta().getDisplayName());
                 Kit kit = null;
                 for (Kit k : kits.getKits()) {
                     String kitName = k.getName()
