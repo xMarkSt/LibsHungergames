@@ -117,7 +117,7 @@ public class CommandManager {
 
     private void loadCommands(JavaPlugin plugin, String packageName) {
         boolean saveConfig = false;
-        System.out.print(String.format(cm.getLoadCommandsPackage(), plugin.getName(), packageName));
+        System.out.println(String.format(cm.getLoadCommandsPackage(), plugin.getName(), packageName));
         try {
             Field commands = plugin.getDescription().getClass().getDeclaredField("commands");
             commands.setAccessible(true);
@@ -135,11 +135,11 @@ public class CommandManager {
                         if (modified)
                             saveConfig = true;
                     } catch (Exception e) {
-                        System.out.print(String.format(cm.getErrorWhileLoadingCommand(), commandClass.getSimpleName(),
+                        System.out.println(String.format(cm.getErrorWhileLoadingCommand(), commandClass.getSimpleName(),
                                 e.getMessage()));
                     }
                 } else {
-                    System.out.print(String.format(cm.getErrorWhileLoadingStatsCommand(), commandClass.getSimpleName()));
+                    System.out.println(String.format(cm.getErrorWhileLoadingStatsCommand(), commandClass.getSimpleName()));
                 }
             }
         }
@@ -188,7 +188,7 @@ public class CommandManager {
                             }
                             modified = true;
                             if (!newFile)
-                                System.out.print(String.format(cm.getAddedMissingConfigValue(), field.getName(), commandName));
+                                System.out.println(String.format(cm.getAddedMissingConfigValue(), field.getName(), commandName));
                         } else if (field.getType().isArray() && value.getClass() == ArrayList.class) {
                             List<Object> array = (List<Object>) value;
                             Object[] newArray = (Object[]) Array.newInstance(((Object[]) field.get(exc))[0].getClass(),
@@ -217,7 +217,7 @@ public class CommandManager {
                         } else
                             field.set(exc, value);
                     } catch (Exception e) {
-                        System.out.print(String.format(cm.getErrorWhileLoadingConfig(), "commands", exc.getClass()
+                        System.out.println(String.format(cm.getErrorWhileLoadingConfig(), "commands", exc.getClass()
                                 .getSimpleName() + " - " + e.getMessage()));
                         e.printStackTrace();
                     }
@@ -225,7 +225,7 @@ public class CommandManager {
             }
             return modified;
         } catch (Exception e) {
-            System.out.print(String.format(cm.getErrorWhileLoadingConfig(), "commands", e.getMessage()));
+            System.out.println(String.format(cm.getErrorWhileLoadingConfig(), "commands", e.getMessage()));
         }
         return false;
     }
@@ -265,7 +265,7 @@ public class CommandManager {
                 if (command != null) {
                     command.setExecutor(exc);
                 } else {
-                    System.out.print(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
+                    System.out.println(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
                             .getErrorWhileLoadingCommand(), name, "Can't register command"));
                 }
             }
@@ -275,7 +275,7 @@ public class CommandManager {
     private void save() {
         try {
             if (!configFile.exists()) {
-                System.out.print(String.format(cm.getCreatingConfigFile(), "commands"));
+                System.out.println(String.format(cm.getCreatingConfigFile(), "commands"));
                 configFile.getParentFile().mkdirs();
                 configFile.createNewFile();
                 newFile = true;

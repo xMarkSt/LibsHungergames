@@ -53,7 +53,7 @@ public class NameManager {
     public void save() {
         try {
             if (!configFile.exists()) {
-                System.out.print(String.format(HungergamesApi.getConfigManager().getLoggerConfig().getCreatingConfigFile(),
+                System.out.println(String.format(HungergamesApi.getConfigManager().getLoggerConfig().getCreatingConfigFile(),
                         "names"));
                 configFile.getParentFile().mkdirs();
                 configFile.createNewFile();

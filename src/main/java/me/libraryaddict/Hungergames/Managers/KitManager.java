@@ -72,7 +72,7 @@ public class KitManager {
 
     public void addKit(final Kit newKit) {
         if (getKitByName(newKit.getName()) != null) {
-            System.out.print(String.format(cm.getKitAlreadyExists(), newKit.getName()));
+            System.out.println(String.format(cm.getKitAlreadyExists(), newKit.getName()));
             return;
         }
         kits.add(newKit);
@@ -159,7 +159,7 @@ public class KitManager {
                         : (Material.getMaterial(args[0].toUpperCase()) == null ? Material.AIR : Material.getMaterial(args[0]
                                 .toUpperCase()));
                 if (mat == Material.AIR) {
-                    System.out.print(String.format(cm.getUnrecognisedItemId(), args[0]));
+                    System.out.println(String.format(cm.getUnrecognisedItemId(), args[0]));
                     return new ItemStack[] { null };
                 }
                 ItemStack item = new ItemStack(mat, (int) amount, (short) Integer.parseInt(args[1]));
@@ -210,7 +210,7 @@ public class KitManager {
                         if (ench == null)
                             ench = Enchantment.getByName(argString.replace("_", " ").toUpperCase());
                         if (ench == null) {
-                            System.out.print(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
+                            System.out.println(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
                                     .getErrorWhileParsingItemStack(), string, argString
                                     + " is not a valid option. Item will still load"));
                             continue;
@@ -231,7 +231,7 @@ public class KitManager {
             String message = ex.getMessage();
             if (ex instanceof ArrayIndexOutOfBoundsException)
                 message = "java.lang.ArrayIndexOutOfBoundsException: " + message;
-            System.out.print(String.format(cm.getErrorWhileParsingItemStack(), string, message));
+            System.out.println(String.format(cm.getErrorWhileParsingItemStack(), string, message));
             ex.printStackTrace();
         }
         return new ItemStack[] { null };

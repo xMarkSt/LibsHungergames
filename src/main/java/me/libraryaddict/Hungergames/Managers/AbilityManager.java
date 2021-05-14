@@ -60,7 +60,7 @@ public class AbilityManager {
     public void initializeAllAbilitiesInPackage(JavaPlugin plugin, String packageName) {
         boolean saveConfig = false;
         YamlConfiguration config = abilityConfigManager.load(plugin);
-        System.out.print(String.format(cm.getLoadAbilitiesPackage(), plugin.getName(), packageName));
+        System.out.println(String.format(cm.getLoadAbilitiesPackage(), plugin.getName(), packageName));
         for (Class abilityClass : ClassGetter.getClassesForPackage(plugin, packageName)) {
             if (AbilityListener.class.isAssignableFrom(abilityClass)) {
                 try {
@@ -107,7 +107,7 @@ public class AbilityManager {
         if (abilityListener != null) {
             abilityListener.registerPlayer(player);
         } else
-            System.out.print(String.format(cm.getErrorAbilityDoesntExist(), player.getName(), abilityName));
+            System.out.println(String.format(cm.getErrorAbilityDoesntExist(), player.getName(), abilityName));
         getPlayerAbilities(player.getName()).add(abilityName);
     }
 

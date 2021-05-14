@@ -84,7 +84,7 @@ public class GenerationManager {
 
                 public void run() {
                     if (doLogging && lastLogged + 5000 < System.currentTimeMillis()) {
-                        System.out.print(String.format(loggerConfig.getGeneratingChunks(),
+                        System.out.println(String.format(loggerConfig.getGeneratingChunks(),
                                 (int) Math.floor((chunksGenerated / totalChunks) * 100))
                                 + "%");
                         lastLogged = System.currentTimeMillis();
@@ -102,7 +102,7 @@ public class GenerationManager {
                     }
                     if (!cordsItel.hasNext()) {
                         if (doLogging) {
-                            System.out.print(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
+                            System.out.println(String.format(HungergamesApi.getConfigManager().getLoggerConfig()
                                     .getChunksGenerated(), (int) chunksGenerated));
                         }
                         chunkGeneratorRunnable = null;
