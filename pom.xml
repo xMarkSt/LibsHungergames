@@ -108,7 +108,7 @@
         <dependency>
             <groupId>com.github.xMarkSt</groupId>
             <artifactId>DeathCause</artifactId>
-            <version>dcdbf7307ae3496a7abaa5132dad7cdc917a94d7</version>
+            <version>6124f3b53f85d16020ed158b31f2f85b016bb508</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.spigotmc</groupId>
