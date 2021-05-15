@@ -29,8 +29,6 @@ public class NameManager {
     public String getItemName(ItemStack item) {
         if (item == null)
             item = new ItemStack(Material.AIR);
-        if (config.contains("" + item.getType().getId()))
-            return config.getString("" + item.getType().getId());
         return getName(item.getType().name());
     }
 
