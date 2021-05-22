@@ -202,7 +202,7 @@ public class MapLoader {
 
     private static void loadMap(File mapDir, File dest, YamlConfiguration config) throws IOException {
         LoggerConfig tm = HungergamesApi.getConfigManager().getLoggerConfig();
-        System.out.print(String.format(tm.getNowAttemptingToLoadAMap(), mapDir.toString()));
+        System.out.println(String.format(tm.getNowAttemptingToLoadAMap(), mapDir.toString()));
         List<File> maps = new ArrayList<File>();
         String dontLoad = config.getString("LastMapUsed", null);
         File toRemove = null;
@@ -232,40 +232,40 @@ public class MapLoader {
                         || name.equalsIgnoreCase("spawns.yml"))
                     copy(f, dest);
             }
-            System.out.print(String.format(tm.getSuccessfullyLoadedMap(), toLoad.getName()));
+            System.out.println(String.format(tm.getSuccessfullyLoadedMap(), toLoad.getName()));
         } else
-            System.out.print(String.format(tm.getNoMapsFound(), mapDir.toString()));
+            System.out.println(String.format(tm.getNoMapsFound(), mapDir.toString()));
     }
 
     private static void loadMapConfiguration(File worldConfig, YamlConfiguration config2) {
         MainConfig configManager = HungergamesApi.getConfigManager().getMainConfig();
         LoggerConfig tm = HungergamesApi.getConfigManager().getLoggerConfig();
         try {
-            System.out.print(tm.getMapConfigNowLoading());
+            System.out.println(tm.getMapConfigNowLoading());
             YamlConfiguration config = null;
             if (!worldConfig.exists()) {
-                System.out.print(tm.getMapConfigNotFound());
+                System.out.println(tm.getMapConfigNotFound());
             } else
                 config = YamlConfiguration.loadConfiguration(worldConfig);
             if (config != null) {
                 if (config.contains("BorderSize")) {
                     configManager.setBorderSize(config.getInt("BorderSize"));
-                    System.out.print(String.format(tm.getMapConfigChangedBorderSize(), config.getInt("BorderSize")));
+                    System.out.println(String.format(tm.getMapConfigChangedBorderSize(), config.getInt("BorderSize")));
                 }
                 if (config.contains("FeastCenterX") && config.contains("FeastCenterZ")) {
                     HungergamesApi.getConfigManager().getFeastConfig().setFeastCenterX(config.getInt("FeastCenterX"));
                     HungergamesApi.getConfigManager().getFeastConfig().setFeastCenterZ(config.getInt("FeastCenterZ"));
-                    System.out.print(String.format(tm.getMapConfigChangedFeastInformation(), config.getInt("FeastCenterX"),
+                    System.out.println(String.format(tm.getMapConfigChangedFeastInformation(), config.getInt("FeastCenterX"),
                             config.getInt("FeastCenterZ")));
                 }
                 if (config.contains("BorderCloseInRate")) {
                     configManager.setAmountBorderClosesInPerSecond(config.getDouble("BorderCloseInRate"));
-                    System.out.print(String.format(tm.getMapConfigChangedBorderCloseInRate(),
+                    System.out.println(String.format(tm.getMapConfigChangedBorderCloseInRate(),
                             config.getDouble("BorderCloseInRate")));
                 }
                 if (config.contains("TimeOfDayWhenGameStarts")) {
                     configManager.setTimeOfDay(config.getInt("TimeOfDayWhenGameStarts"));
-                    System.out.print(String.format(tm.getMapConfigChangedTimeOfDay(), config.getInt("TimeOfDayWhenGameStarts")));
+                    System.out.println(String.format(tm.getMapConfigChangedTimeOfDay(), config.getInt("TimeOfDayWhenGameStarts")));
                 }
                 isBorderParticles = config.getBoolean("Border.Particles", config2.getBoolean("Border.Particles"));
                 setBorderBlocks = config.getBoolean("Border.Blocks", config2.getBoolean("Border.Blocks"));
@@ -275,7 +275,7 @@ public class MapLoader {
                 borderBlock = parseMaterialString(str);
             }
             File spawnsFile = new File(worldConfig.getParentFile(), "spawns.yml");
-            System.out.print(tm.getLoadSpawnsConfig());
+            System.out.println(tm.getLoadSpawnsConfig());
             if (spawnsFile.exists()) {
                 config = YamlConfiguration.loadConfiguration(spawnsFile);
                 int i = 0;
@@ -303,15 +303,15 @@ public class MapLoader {
                             }
                         }
                         if (x == Integer.MAX_VALUE) {
-                            System.out.print(String.format(tm.getLoadSpawnsConfigError(), spawnName, "X"));
+                            System.out.println(String.format(tm.getLoadSpawnsConfigError(), spawnName, "X"));
                             continue;
                         }
                         if (y == Integer.MAX_VALUE) {
-                            System.out.print(String.format(tm.getLoadSpawnsConfigError(), spawnName, "Y"));
+                            System.out.println(String.format(tm.getLoadSpawnsConfigError(), spawnName, "Y"));
                             continue;
                         }
                         if (z == Integer.MAX_VALUE) {
-                            System.out.print(String.format(tm.getLoadSpawnsConfigError(), spawnName, "Y"));
+                            System.out.println(String.format(tm.getLoadSpawnsConfigError(), spawnName, "Y"));
                             continue;
                         }
                         Location loc = new Location(HungergamesApi.getHungergames().world, x, y, z);
@@ -324,20 +324,20 @@ public class MapLoader {
                             double dist = Math.sqrt(Math.pow(loc.getX() - newLoc.getX(), 2)
                                     + Math.pow(loc.getY() - newLoc.getY(), 2) + Math.pow(loc.getZ() - newLoc.getZ(), 2));
                             if (dist >= mConfig.getBorderSize()) {
-                                System.out.print(String.format(tm.getLoadedSpawnOutsideBorder(), spawnName));
+                                System.out.println(String.format(tm.getLoadedSpawnOutsideBorder(), spawnName));
                             }
                         }
                         HungergamesApi.getPlayerManager().addSpawnPoint(loc, radius, height);
                         i++;
                     } catch (Exception ex) {
-                        System.out.print(String.format(tm.getLoadSpawnsConfigError(), spawnName, ex.getMessage()));
+                        System.out.println(String.format(tm.getLoadSpawnsConfigError(), spawnName, ex.getMessage()));
                     }
                 }
-                System.out.print(String.format(tm.getLoadedSpawnsConfig(), i));
+                System.out.println(String.format(tm.getLoadedSpawnsConfig(), i));
             } else
-                System.out.print(tm.getLoadSpawnsConfigNotFound());
+                System.out.println(tm.getLoadSpawnsConfigNotFound());
             if (config != null)
-                System.out.print(tm.getMapConfigLoaded());
+                System.out.println(tm.getMapConfigLoaded());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

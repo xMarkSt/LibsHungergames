@@ -63,9 +63,9 @@ public class PlayerJoinThread extends Thread {
                             UUID uuid = profile.getId();
                             if (uuid != null) {
                                 stmt.execute("UPDATE `HGKits` SET uuid = '" + uuid.toString() + "' WHERE Name='" + name + "'");
-                                System.out.print("[LibsHungergames] Converted " + name + " and added uuid " + uuid.toString());
+                                System.out.println("[LibsHungergames] Converted " + name + " and added uuid " + uuid.toString());
                             } else {
-                                System.out.print("[LibsHungergames] Failed to find a UUID for " + name);
+                                System.out.println("[LibsHungergames] Failed to find a UUID for " + name);
                             }
                         }
                         stmt.close();

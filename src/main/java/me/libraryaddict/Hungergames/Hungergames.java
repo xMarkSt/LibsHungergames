@@ -34,6 +34,7 @@ import net.techcable.hungergames.SafeSounds;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
+import org.bukkit.GameRule;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -224,7 +225,7 @@ public class Hungergames extends JavaPlugin {
         while (HungergamesApi.getConfigManager().getMySqlConfig().isStatsEnabled()
                 && !HungergamesApi.getPlayerManager().saveGamer.isEmpty() && slept-- >= 0) {
             try {
-                System.out.print(String.format(HungergamesApi.getConfigManager().getLoggerConfig().getWaitingForStatsToSave(),
+                System.out.println(String.format(HungergamesApi.getConfigManager().getLoggerConfig().getWaitingForStatsToSave(),
                         HungergamesApi.getPlayerManager().saveGamer.size(), (slept + 1)));
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -255,7 +256,8 @@ public class Hungergames extends JavaPlugin {
             public void run() {
                 world = Bukkit.getWorlds().get(0);
                 world.setAutoSave(false);
-                world.setGameRuleValue("doDaylightCycle", "false");
+                world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
+                world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
                 world.setTime(6000);
                 if (mainConfig.isForcedCords())
                     world.setSpawnLocation(mainConfig.getForceSpawnX(),
@@ -420,7 +422,7 @@ public class Hungergames extends JavaPlugin {
     }
 
     public void shutdown(final String messageToKickWith) {
-        System.out.print(HungergamesApi.getConfigManager().getLoggerConfig().getShuttingDown());
+        System.out.println(HungergamesApi.getConfigManager().getLoggerConfig().getShuttingDown());
         ServerShutdownEvent event = new ServerShutdownEvent();
         Bukkit.getServer().getPluginManager().callEvent(event);
         if (!event.isCancelled()) {
@@ -435,7 +437,7 @@ public class Hungergames extends JavaPlugin {
                 }
             }, 60);
         } else
-            System.out.print(HungergamesApi.getConfigManager().getLoggerConfig().getShutdownCancelled());
+            System.out.println(HungergamesApi.getConfigManager().getLoggerConfig().getShutdownCancelled());
     }
 
     public void startGame() {

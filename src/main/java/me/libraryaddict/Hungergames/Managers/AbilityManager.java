@@ -66,7 +66,7 @@ public class AbilityManager {
                 try {
                     if (abilities.containsKey(abilityClass.getSimpleName()))
                         throw new Exception(cm.getAbilityAlreadyExists());
-                    // System.out.print(String.format(cm.getLoggerFoundAbilityInPackage(),
+                    // System.out.println(String.format(cm.getLoggerFoundAbilityInPackage(),
                     // abilityClass.getSimpleName()));
                     AbilityListener abilityListener = (AbilityListener) abilityClass.newInstance();
                     final boolean modified = abilityListener.load(
@@ -81,7 +81,7 @@ public class AbilityManager {
                     abilities.put(abilityClass.getSimpleName(), abilityListener);
                 } catch (Exception e) {
                     System.out
-                            .print(String.format(cm.getErrorWhileLoadingConfig(), abilityClass.getSimpleName(), e.getMessage()));
+                            .println(String.format(cm.getErrorWhileLoadingConfig(), abilityClass.getSimpleName(), e.getMessage()));
                 }
             }
         }

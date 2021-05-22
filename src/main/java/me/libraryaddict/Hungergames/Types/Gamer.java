@@ -27,15 +27,15 @@ public class Gamer {
     private static PlayerManager pm = HungergamesApi.getPlayerManager();
     static {
         if (Bukkit.getPluginManager().getPlugin("Vault") == null) {
-            System.out.print(HungergamesApi.getConfigManager().getLoggerConfig().getFailedToFindVault());
+            System.out.println(HungergamesApi.getConfigManager().getLoggerConfig().getFailedToFindVault());
         } else {
             RegisteredServiceProvider<Economy> economyProvider = Bukkit.getServer().getServicesManager()
                     .getRegistration(net.milkbowl.vault.economy.Economy.class);
             if (economyProvider != null) {
                 economy = economyProvider.getProvider();
-                System.out.print(HungergamesApi.getConfigManager().getLoggerConfig().getRegisteredVault());
+                System.out.println(HungergamesApi.getConfigManager().getLoggerConfig().getRegisteredVault());
             } else {
-                System.out.print(HungergamesApi.getConfigManager().getLoggerConfig().getFailedToRegisterVault());
+                System.out.println(HungergamesApi.getConfigManager().getLoggerConfig().getFailedToRegisterVault());
             }
         }
     }

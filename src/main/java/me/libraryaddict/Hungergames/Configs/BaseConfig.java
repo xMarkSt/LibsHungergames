@@ -94,7 +94,7 @@ public abstract class BaseConfig {
         try {
             boolean saveConfig = false;
             LoggerConfig loggerConfig = HungergamesApi.getConfigManager().getLoggerConfig();
-            System.out.print(String.format(loggerConfig.getLoadingConfigFile(), this.configName));
+            System.out.println(String.format(loggerConfig.getLoadingConfigFile(), this.configName));
             try {
                 boolean modified = false;
                 for (Field field : getClass().getDeclaredFields()) {
@@ -108,7 +108,7 @@ public abstract class BaseConfig {
                             config.set(field.getName(), serialize(value));
                             modified = true;
                             if (!newFile) {
-                                System.out.print(String.format(loggerConfig.getAddedMissingConfigValue(), field.getName(),
+                                System.out.println(String.format(loggerConfig.getAddedMissingConfigValue(), field.getName(),
                                         this.getConfigName()));
                             }
                         } else {
@@ -120,7 +120,7 @@ public abstract class BaseConfig {
                             }
                         }
                     } catch (Exception e) {
-                        System.out.print(String.format(loggerConfig.getErrorWhileLoadingConfigValue(), this.getConfigName(),
+                        System.out.println(String.format(loggerConfig.getErrorWhileLoadingConfigValue(), this.getConfigName(),
                                 field.getName(), e.getMessage()));
                     }
                 }
@@ -128,7 +128,7 @@ public abstract class BaseConfig {
                     saveConfig = true;
                 }
             } catch (Exception e) {
-                System.out.print(String.format(loggerConfig.getErrorWhileLoadingConfig(), getConfigName(), e.getMessage()));
+                System.out.println(String.format(loggerConfig.getErrorWhileLoadingConfig(), getConfigName(), e.getMessage()));
             }
             if (saveConfig)
                 save();

@@ -380,7 +380,7 @@ public class MainConfig extends BaseConfig {
                     try {
                         checkUpdate();
                     } catch (Exception ex) {
-                        System.out.print(String.format(cm.getErrorWhenCheckingForUpdate(), ex.getMessage()));
+                        System.out.println(String.format(cm.getErrorWhenCheckingForUpdate(), ex.getMessage()));
                     }
                 }
             });

@@ -93,7 +93,7 @@ public abstract class AbilityListener implements Listener {
                         }
                         modified = true;
                         if (!isNewFile)
-                            System.out.print(String.format(cm.getAbilityMissingConfigValue(), getClass().getSimpleName(),
+                            System.out.println(String.format(cm.getAbilityMissingConfigValue(), getClass().getSimpleName(),
                                     field.getName()));
                     } else if (field.getType().isArray() && value.getClass() == ArrayList.class) {
                         List<Object> array = (List<Object>) value;
@@ -113,7 +113,7 @@ public abstract class AbilityListener implements Listener {
                     } else
                         field.set(this, value);
                 } catch (Exception e) {
-                    System.out.print(String.format(cm.getErrorWhileLoadingAbility(), getClass().getSimpleName(), e.getMessage()));
+                    System.out.println(String.format(cm.getErrorWhileLoadingAbility(), getClass().getSimpleName(), e.getMessage()));
                 }
         }
         return modified;

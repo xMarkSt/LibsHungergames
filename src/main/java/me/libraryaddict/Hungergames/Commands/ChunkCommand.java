@@ -21,7 +21,7 @@ public class ChunkCommand implements CommandExecutor {
         if (gamer.getChunkCooldown() < System.currentTimeMillis() / 1000L) {
             Player p = gamer.getPlayer();
             gamer.setChunkCooldown((System.currentTimeMillis() / 1000) + 10);
-            System.out.print(String.format(cm.getCommandChunkLoggerReloadingChunks(), p.getName()));
+            System.out.println(String.format(cm.getCommandChunkLoggerReloadingChunks(), p.getName()));
             org.bukkit.Chunk chunk = p.getWorld().getChunkAt(p.getLocation());
             for (int i = -16; i <= 16; i = i + 16) {
                 for (int a = -16; a <= 16; a = a + 16) {

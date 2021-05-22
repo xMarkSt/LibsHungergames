@@ -10,14 +10,7 @@ import me.libraryaddict.Hungergames.Managers.PlayerManager;
 import me.libraryaddict.Hungergames.Types.Gamer;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.NPC;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Tameable;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -88,13 +81,13 @@ public class GeneralListener implements Listener {
             if (hg.currentTime < 0) {
                 if (event.getSpawnReason() != SpawnReason.CUSTOM) {
                     event.setCancelled(true);
-                    if (!(event.getEntity() instanceof Monster)) {
+                    if (!(event.getEntity() instanceof Monster || event.getEntity() instanceof WaterMob)) {
                         if (config.getSpawnChanceMonster() <= 0 || new Random().nextInt(config.getSpawnChanceMonster()) == 0)
                             hg.entitysToSpawn.put(event.getLocation().clone().add(0, new Random().nextDouble(), 0),
                                     event.getEntityType());
                     }
                 }
-            } else if (event.getEntity() instanceof Animals || event.getEntity() instanceof NPC) {
+            } else if (event.getEntity() instanceof Animals || event.getEntity() instanceof NPC || event.getEntity() instanceof WaterMob) {
                 if (event.getSpawnReason() == SpawnReason.CHUNK_GEN || event.getSpawnReason() == SpawnReason.NATURAL) {
                     if (config.getSpawnChanceAnimal() > 0 && new Random().nextInt(config.getSpawnChanceAnimal()) != 0)
                         event.setCancelled(true);

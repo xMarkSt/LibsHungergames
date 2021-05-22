@@ -103,7 +103,7 @@ public class CommandManager {
         } else {
             modified = startRegisteringCommand(exc, exc.getClass().getSimpleName().replace("Command", ""));
         }
-        // System.out.print(String.format(cm.getLoggerFoundCommandInPackage(),
+        // System.out.println(String.format(cm.getLoggerFoundCommandInPackage(),
         // commandName));
         if (save && modified)
             save();
@@ -295,7 +295,7 @@ public class CommandManager {
                 registerCommand(section.getString("CommandName"), exc, HungergamesApi.getHungergames(), false);
             } catch (Exception ex) {
                 System.out
-                        .print(String.format(cm.getErrorWhileLoadingCommand(), exc.getClass().getSimpleName(), ex.getMessage()));
+                        .println(String.format(cm.getErrorWhileLoadingCommand(), exc.getClass().getSimpleName(), ex.getMessage()));
             }
         }
         return modified;
