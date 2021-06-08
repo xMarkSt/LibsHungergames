@@ -143,28 +143,28 @@ public class TranslationConfig extends BaseConfig {
     private String inventoryDontOwnKit = "";
     private String inventoryOwnKit = "";
     private String[] itemBuyKitBackDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "back a page" };
+            ChatColor.LIGHT_PURPLE + "to the previous page" };
     private String[] itemBuyKitDescription = new String[] { ChatColor.LIGHT_PURPLE + "Right click with this to open a",
             ChatColor.LIGHT_PURPLE + "menu to buy kits at a click!" };
     private String[] itemBuyKitForwardsDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "forwards a page" };
+            ChatColor.LIGHT_PURPLE + "to the next page" };
     private String itemBuyKitInventoryBackName = ChatColor.RED + "Back";
     private String itemBuyKitInventoryForwardsName = ChatColor.RED + "Back";
     private String itemBuyKitName = ChatColor.WHITE + "Buy a kit";
     private String[] itemKitSelectorBackDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "back a page" };
+            ChatColor.LIGHT_PURPLE + "to the previous page" };
     private String itemKitSelectorBackName = ChatColor.RED + "Back";
     private String[] itemKitSelectorDescription = new String[] { ChatColor.LIGHT_PURPLE + "Right click with this",
             ChatColor.LIGHT_PURPLE + "to open a kit selection screen!" };
     private String[] itemKitSelectorForwardsDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "forwards a page" };
+            ChatColor.LIGHT_PURPLE + "to the next page" };
     private String itemKitSelectorForwardsName = ChatColor.RED + "Forward";
     private String itemKitSelectorName = ChatColor.WHITE + "Kit Selector";
     private String[] itemSpectatorInventoryBackDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "back a page" };
+            ChatColor.LIGHT_PURPLE + "to the previous page" };
     private String itemSpectatorInventoryBackName = ChatColor.RED + "Back";
     private String[] itemSpectatorInventoryForwardsDescription = new String[] { ChatColor.LIGHT_PURPLE + "Click this to move",
-            ChatColor.LIGHT_PURPLE + "forwards a page" };
+            ChatColor.LIGHT_PURPLE + "to the next page" };
     private String itemSpectatorInventoryForwardsName = ChatColor.RED + "Back";
     private String kickDeathMessage = "%s";
     private String kickGameFull = "The game is full!";
