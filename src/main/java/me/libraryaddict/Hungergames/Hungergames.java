@@ -77,7 +77,7 @@ public class Hungergames extends JavaPlugin {
     public void checkWinner() {
         if (doSeconds) {
             List<Gamer> aliveGamers = pm.getAliveGamers();
-            if (aliveGamers.size() == 1) {
+            if (aliveGamers.size() == 1 && !mainConfig.isInfiniteGame()) {
                 doSeconds = false;
                 final Gamer winner = aliveGamers.get(0);
                 if (winner.getStats() != null) {
