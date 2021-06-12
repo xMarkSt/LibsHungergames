@@ -279,7 +279,7 @@ public class Hungergames extends JavaPlugin {
                             100, spawnGround.getType().createBlockData());
                     world.getSpawnLocation().setY(platformHeight + 2);
                 }
-                world.setDifficulty(Difficulty.HARD);
+                // world.setDifficulty(Difficulty.HARD);
                 if (world.hasStorm())
                     world.setStorm(false);
                 world.setWeatherDuration(999999999);
