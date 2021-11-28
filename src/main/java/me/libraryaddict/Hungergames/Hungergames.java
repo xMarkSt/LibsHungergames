@@ -91,12 +91,10 @@ public class Hungergames extends JavaPlugin {
                 Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                     public void run() {
                         String msg = String.format(translationsConfig.getBroadcastWinnerWon(), winner.getName());
-                        if (PacketType.Play.Server.TITLE.isSupported()) {
-                            String subtitle = String.format(translationsConfig.getBroadcastWinnerWonSubtitle(), winner.getName());
-                            Title title = new Title(msg, subtitle);
-                            title.sendTo(Bukkit.getOnlinePlayers());
-                        } else {
-                            Bukkit.broadcastMessage(msg);
+                        String subtitle = String.format(translationsConfig.getBroadcastWinnerWonSubtitle(), winner.getName());
+                        List<Gamer> gamers = pm.getGamers();
+                        for (Gamer gamer : gamers) {
+                            gamer.getPlayer().sendTitle(msg, subtitle, 20, 200, 20);
                         }
                     }
                 }, 0, mainConfig.getWonBroadcastsDelay() * 20);
