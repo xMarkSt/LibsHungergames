@@ -19,7 +19,6 @@ import me.libraryaddict.Hungergames.Types.Gamer;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 import me.libraryaddict.Hungergames.Utilities.MapLoader;
 import me.libraryaddict.Hungergames.techcable.ActionBar;
-import me.libraryaddict.Hungergames.techcable.Title;
 import me.libraryaddict.death.DeathHandler;
 import me.libraryaddict.scoreboard.ScoreboardManager;
 
@@ -77,7 +76,7 @@ public class Hungergames extends JavaPlugin {
     public void checkWinner() {
         if (doSeconds) {
             List<Gamer> aliveGamers = pm.getAliveGamers();
-            if (aliveGamers.size() == 1) {
+            if (aliveGamers.size() == 1 && !mainConfig.isInfiniteGame()) {
                 doSeconds = false;
                 final Gamer winner = aliveGamers.get(0);
                 if (winner.getStats() != null) {
@@ -91,12 +90,10 @@ public class Hungergames extends JavaPlugin {
                 Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                     public void run() {
                         String msg = String.format(translationsConfig.getBroadcastWinnerWon(), winner.getName());
-                        if (PacketType.Play.Server.TITLE.isSupported()) {
-                            String subtitle = String.format(translationsConfig.getBroadcastWinnerWonSubtitle(), winner.getName());
-                            Title title = new Title(msg, subtitle);
-                            title.sendTo(Bukkit.getOnlinePlayers());
-                        } else {
-                            Bukkit.broadcastMessage(msg);
+                        String subtitle = String.format(translationsConfig.getBroadcastWinnerWonSubtitle(), winner.getName());
+                        List<Gamer> gamers = pm.getGamers();
+                        for (Gamer gamer : gamers) {
+                            gamer.getPlayer().sendTitle(msg, subtitle, 20, 200, 20);
                         }
                     }
                 }, 0, mainConfig.getWonBroadcastsDelay() * 20);
@@ -279,7 +276,7 @@ public class Hungergames extends JavaPlugin {
                             100, spawnGround.getType().createBlockData());
                     world.getSpawnLocation().setY(platformHeight + 2);
                 }
-                world.setDifficulty(Difficulty.HARD);
+                // world.setDifficulty(Difficulty.HARD);
                 if (world.hasStorm())
                     world.setStorm(false);
                 world.setWeatherDuration(999999999);
@@ -474,7 +471,7 @@ public class Hungergames extends JavaPlugin {
             }
             pm.sendToSpawn(gamer);
         }
-        world.setGameRuleValue("doDaylightCycle", "true");
+        // world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false); TODO make this into a config option
         world.setTime(mainConfig.getTimeOfDay());
         world.playSound(world.getSpawnLocation(), SafeSounds.THUNDER.getBukkitSound(), 1, 0.8F);
         Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {

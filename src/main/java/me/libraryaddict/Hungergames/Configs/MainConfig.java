@@ -139,10 +139,14 @@ public class MainConfig extends BaseConfig {
      */
     private boolean metricsEnabled = true;
     /**
+     * if set to true, doesn't stop the game at 1 player left.
+     */
+    private boolean infiniteGame = false;
+    /**
      * Whats the minimal players required to start the game
      */
     private int minPlayersForGameStart = 2;
-    private boolean modifyForTerrainControl = true;;
+    private boolean modifyForTerrainControl = true;
     /**
      * Does mushroom stew instant eat for hearts
      */

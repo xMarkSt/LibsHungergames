@@ -57,7 +57,7 @@ public class TopStatsCommand implements CommandExecutor {
             meta.setDisplayName(ChatColor.GOLD + "Fowards");
             ArrayList<String> lore = new ArrayList<String>();
             lore.add(ChatColor.YELLOW + "Click this to move");
-            lore.add(ChatColor.YELLOW + "forwards a page!");
+            lore.add(ChatColor.YELLOW + "to the next page!");
             meta.setLore(lore);
             topStatsForwardsIcon.setItemMeta(meta);
         }
@@ -67,7 +67,7 @@ public class TopStatsCommand implements CommandExecutor {
             meta.setDisplayName(ChatColor.GOLD + "Back");
             ArrayList<String> lore = new ArrayList<String>();
             lore.add(ChatColor.YELLOW + "Click this to move");
-            lore.add(ChatColor.YELLOW + "back a page!");
+            lore.add(ChatColor.YELLOW + "to the previous page!");
             meta.setLore(lore);
             topStatsBackIcon.setItemMeta(meta);
         }
