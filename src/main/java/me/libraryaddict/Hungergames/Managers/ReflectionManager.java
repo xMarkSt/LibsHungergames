@@ -28,10 +28,10 @@ public class ReflectionManager
             commandMap = (SimpleCommandMap) Bukkit.getServer().getClass().getDeclaredMethod("getCommandMap")
                     .invoke(Bukkit.getServer());
             Object obj = Bukkit.getServer().getClass().getDeclaredMethod("getServer").invoke(Bukkit.getServer());
-            serverSettings = obj.getClass().getField("propertyManager").get(obj); //DedicatedServerSettings
-            propertyManager = serverSettings.getClass().getDeclaredMethod("getProperties").invoke(serverSettings); // DedicatedServerProperties
-            properties = (Properties) propertyManager.getClass().getField("properties").get(propertyManager);
-            currentVersion = propertyManager.getClass().getPackage().getName();
+            serverSettings = obj.getClass().getField("y").get(obj); //DedicatedServerSettings
+            propertyManager = serverSettings.getClass().getDeclaredMethod("a").invoke(serverSettings); // DedicatedServerProperties
+            properties = (Properties) propertyManager.getClass().getField("Y").get(propertyManager); // Properties
+            currentVersion = Bukkit.getServer().getClass().getPackage().getName();
             itemClass = getCraftClass("inventory.CraftItemStack");
         }
         catch (Exception ex)
@@ -71,7 +71,7 @@ public class ReflectionManager
     {
         try
         {
-            return Class.forName("org.bukkit.craftbukkit." + currentVersion.replace("net.minecraft.server.", "") + "."
+            return Class.forName(currentVersion + "."
                     + className);
         }
         catch (Exception e)
@@ -113,7 +113,7 @@ public class ReflectionManager
         {
             try
             {
-                properties = (Properties) propertyManager.getClass().getField("properties").get(propertyManager);
+                properties = (Properties) propertyManager.getClass().getField("Y").get(propertyManager); // Properties
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@ public class ReflectionManager
     {
         try
         {
-            serverSettings.getClass().getMethod("save").invoke(serverSettings);
+            serverSettings.getClass().getMethod("b").invoke(serverSettings); //forceSave()
         }
         catch (Exception e)
         {

@@ -115,8 +115,9 @@ public abstract class ClickInventory implements Listener {
         }
         try {
             Object player = getPlayer().getClass().getDeclaredMethod("getHandle").invoke(getPlayer());
-            Class c = Class.forName(player.getClass().getName().replace("Player", "Human"));
-            Object defaultContainer = c.getField("defaultContainer").get(player);
+            Class c = Class.forName(player.getClass().getName()
+                    .replace("server.level.EntityPlayer", "world.entity.player.EntityHuman"));
+            Object defaultContainer = c.getField("defaultContainer").get(player); // causes error
             Field activeContainer = c.getField("activeContainer");
             if (activeContainer.get(player) == defaultContainer) {
                 getPlayer().openInventory(currentInventory);

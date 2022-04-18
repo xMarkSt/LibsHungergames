@@ -2,7 +2,7 @@ name: LibsHungergames
 main: me.libraryaddict.Hungergames.Hungergames
 author: libraryaddict
 version: ${project.version}
-website: http://www.spigotmc.org/resources/libs-hungergames.55/
-load: startup
+website: https://github.com/xMarkSt/LibsHungergames
+load: STARTUP
 softdepend: [LibsDisguises, Vault, TerrainControl, ProtocolLib]
-api-version: 1.16
+api-version: 1.18

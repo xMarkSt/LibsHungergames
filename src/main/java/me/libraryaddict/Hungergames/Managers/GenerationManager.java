@@ -267,7 +267,7 @@ public class GenerationManager {
     }
 
     private void removeLeaves(Block b) {
-        for (BlockFace face : ((b.getBiome() == Biome.JUNGLE || b.getBiome() == Biome.JUNGLE_HILLS || !HungergamesApi
+        for (BlockFace face : ((b.getBiome() == Biome.JUNGLE || b.getBiome() == Biome.BAMBOO_JUNGLE || !HungergamesApi
                 .getConfigManager().getFeastConfig().isRemoveTrees()) ? jungleFaces : faces)) {
             Block newB = b.getRelative(face);
             // If the blocks are useless decoration
