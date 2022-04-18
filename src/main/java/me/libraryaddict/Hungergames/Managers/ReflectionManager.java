@@ -15,6 +15,7 @@ public class ReflectionManager
 {
     private SimpleCommandMap commandMap;
     private String currentVersion;
+    private String currentCraftBukkitVersion;
     private boolean gameProfile = false;
     private Class itemClass;
     private Properties properties;
@@ -31,7 +32,8 @@ public class ReflectionManager
             serverSettings = obj.getClass().getField("y").get(obj); //DedicatedServerSettings
             propertyManager = serverSettings.getClass().getDeclaredMethod("a").invoke(serverSettings); // DedicatedServerProperties
             properties = (Properties) propertyManager.getClass().getField("Y").get(propertyManager); // Properties
-            currentVersion = Bukkit.getServer().getClass().getPackage().getName();
+            currentCraftBukkitVersion = Bukkit.getServer().getClass().getPackage().getName();
+            currentVersion = currentCraftBukkitVersion.replace("org.bukkit.craftbukkit.", "net.minecraft.server.");
             itemClass = getCraftClass("inventory.CraftItemStack");
         }
         catch (Exception ex)
@@ -71,8 +73,7 @@ public class ReflectionManager
     {
         try
         {
-            return Class.forName(currentVersion + "."
-                    + className);
+            return Class.forName(currentCraftBukkitVersion + "." + className);
         }
         catch (Exception e)
         {
