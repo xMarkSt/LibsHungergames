@@ -65,7 +65,7 @@ public class Hungergames extends JavaPlugin {
      * doSeconds is false when the game has ended
      */
     public boolean doSeconds = true;
-    public HashMap<Location, EntityType> entitysToSpawn = new HashMap<Location, EntityType>();
+    public HashMap<Location, EntityType> entitiesToSpawn = new HashMap<Location, EntityType>();
     private MainConfig mainConfig;
     private PlayerListener playerListener;
     private PlayerManager pm;
@@ -482,9 +482,9 @@ public class Hungergames extends JavaPlugin {
                     kit.giveKit();
                 HungergamesApi.getAbilityManager().registerAbilityListeners();
                 Bukkit.getPluginManager().callEvent(new GameStartEvent());
-                for (Location l : entitysToSpawn.keySet())
-                    l.getWorld().spawnEntity(l, entitysToSpawn.get(l));
-                entitysToSpawn.clear();
+                for (Location l : entitiesToSpawn.keySet())
+                    l.getWorld().spawnEntity(l, entitiesToSpawn.get(l));
+                entitiesToSpawn.clear();
             }
         });
         checkWinner();

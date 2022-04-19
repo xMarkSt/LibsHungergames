@@ -38,7 +38,7 @@ public class MainConfig extends BaseConfig {
     /**
      * Does the plugin check for updates..
      */
-    private boolean checkUpdates = true;
+    private boolean checkUpdates = false;
 
     /**
      * Commands to run before the server shuts down

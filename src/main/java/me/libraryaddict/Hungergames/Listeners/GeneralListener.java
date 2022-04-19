@@ -83,7 +83,7 @@ public class GeneralListener implements Listener {
                     event.setCancelled(true);
                     if (!(event.getEntity() instanceof Monster || event.getEntity() instanceof WaterMob)) {
                         if (config.getSpawnChanceMonster() <= 0 || new Random().nextInt(config.getSpawnChanceMonster()) == 0)
-                            hg.entitysToSpawn.put(event.getLocation().clone().add(0, new Random().nextDouble(), 0),
+                            hg.entitiesToSpawn.put(event.getLocation().clone().add(0, new Random().nextDouble(), 0),
                                     event.getEntityType());
                     }
                 }
