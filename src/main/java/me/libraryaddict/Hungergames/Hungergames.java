@@ -491,5 +491,4 @@ public class Hungergames extends JavaPlugin {
         HungergamesApi.getInventoryManager().updateSpectatorHeads();
         doStage();
     }
-
 }

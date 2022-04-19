@@ -113,24 +113,7 @@ public abstract class ClickInventory implements Listener {
             heldItem = getPlayer().getItemOnCursor();
             getPlayer().setItemOnCursor(new ItemStack(Material.AIR));
         }
-        try {
-            Object player = getPlayer().getClass().getDeclaredMethod("getHandle").invoke(getPlayer());
-            Class c = Class.forName(player.getClass().getName()
-                    .replace("server.level.EntityPlayer", "world.entity.player.EntityHuman"));
-            Object defaultContainer = c.getField("defaultContainer").get(player); // causes error
-            Field activeContainer = c.getField("activeContainer");
-            if (activeContainer.get(player) == defaultContainer) {
-                getPlayer().openInventory(currentInventory);
-            } else {
-                // Do this so that other inventories know their time is over.
-                Class.forName("org.bukkit.craftbukkit." + c.getName().split("\\.")[3] + ".event.CraftEventFactory")
-                        .getMethod("handleInventoryCloseEvent", c).invoke(null, player);
-                activeContainer.set(player, defaultContainer);
-                getPlayer().openInventory(currentInventory);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        getPlayer().openInventory(currentInventory);
         if (!isSwitchingInventory) {
             Bukkit.getPluginManager().registerEvents(this, plugin);
             getPlayer().setMetadata(getClass().getSimpleName(), new FixedMetadataValue(plugin, this));
