@@ -16,9 +16,12 @@ import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.DisguiseType;
 import me.libraryaddict.disguise.disguisetypes.MobDisguise;
 
+/**
+ * Kit that turns the user into a cat after 2 seconds of sprinting
+ */
 public class Pussy extends AbilityListener implements Disableable {
-    private transient HashMap<Player, Integer> pussys = new HashMap<Player, Integer>();
-    public int timeToTransform = 5;
+    private transient HashMap<Player, Integer> pussies = new HashMap<Player, Integer>();
+    public int timeToTransform = 2;
     public String transformedFromCat = ChatColor.BLUE + "HISS!";
     public String transformedIntoCat = ChatColor.BLUE + "Meow!";
 
@@ -34,8 +37,8 @@ public class Pussy extends AbilityListener implements Disableable {
     @EventHandler
     public void onKilled(PlayerKilledEvent event) {
         Player p = event.getKilled().getPlayer();
-        if (pussys.containsKey(p)) {
-            Bukkit.getScheduler().cancelTask(pussys.remove(p));
+        if (pussies.containsKey(p)) {
+            Bukkit.getScheduler().cancelTask(pussies.remove(p));
         }
     }
 
@@ -50,9 +53,9 @@ public class Pussy extends AbilityListener implements Disableable {
                         DisguiseAPI.disguiseToAll(p, new MobDisguise(DisguiseType.OCELOT, true));
                     }
                 }, timeToTransform * 20);
-                pussys.put(p, id);
-            } else if (pussys.containsKey(p)) {
-                Bukkit.getScheduler().cancelTask(pussys.remove(p));
+                pussies.put(p, id);
+            } else if (pussies.containsKey(p)) {
+                Bukkit.getScheduler().cancelTask(pussies.remove(p));
                 if (DisguiseAPI.isDisguised(p)) {
                     p.sendMessage(transformedFromCat);
                     DisguiseAPI.undisguiseToAll(p);

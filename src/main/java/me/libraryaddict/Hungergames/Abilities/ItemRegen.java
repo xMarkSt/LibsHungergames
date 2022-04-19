@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Ability used by other kits. (libraryaddict kit?)
+ */
 public class ItemRegen extends AbilityListener implements Disableable {
     public String[] itemsToRegen = new String[] {
             "FirstItemGivenAt SecondsBetweenItems KitName ItemType ItemDurability ItemAmount ItemData",

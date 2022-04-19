@@ -8,6 +8,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import me.libraryaddict.Hungergames.Interfaces.Disableable;
 import me.libraryaddict.Hungergames.Types.AbilityListener;
 
+/**
+ * Kit that allows all mobs to be killed in two hits. The first hit will almost kill it. The second hit will finish it off.
+ */
 public class Butcher extends AbilityListener implements Disableable {
 
     @EventHandler
@@ -19,7 +22,6 @@ public class Butcher extends AbilityListener implements Disableable {
                     event.setDamage(0);
                     entity.setHealth(1);
                 }
-
             }
         }
     }

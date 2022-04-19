@@ -7,6 +7,9 @@ import me.libraryaddict.Hungergames.Types.AbilityListener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
+/**
+ * Kit that makes the user no longer drop items on death.
+ */
 public class Miser extends AbilityListener implements Disableable {
 
     @EventHandler(priority = EventPriority.MONITOR)

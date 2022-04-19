@@ -23,6 +23,12 @@ import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import net.techcable.hungergames.SafeSounds;
 
+/**
+ * Kits that lets the user freeze the hands of the person they attack.
+ * When frozen they are unable to switch their items such as from cobblestone to a iron sword.
+ * The effect lasts for 10 seconds and has a cool down of 20 seconds.
+ * There is a chance of 25% they freeze.
+ */
 public class Icicles extends AbilityListener implements Disableable {
 
     public int chanceInOneOfFreezing = 4;

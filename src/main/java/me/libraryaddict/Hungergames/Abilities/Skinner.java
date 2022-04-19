@@ -21,6 +21,11 @@ import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 import me.libraryaddict.disguise.events.DisguiseEvent;
 import me.libraryaddict.disguise.events.UndisguiseEvent;
 
+/**
+ * Kit that gives the user a chance of 1 in 3 of skinning another player alive.
+ * Once skinned, they will forever have the nameplate ''Default'' for the remainder of the game.
+ * Even while spectating. But, all users of this kit are already known as ''Default''.
+ */
 public class Skinner extends AbilityListener implements Disableable {
     public int chanceInOneOfSkinning = 3;
     private boolean disable = true;

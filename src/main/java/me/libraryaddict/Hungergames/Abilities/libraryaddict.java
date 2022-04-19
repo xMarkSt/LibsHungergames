@@ -13,6 +13,9 @@ import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import net.techcable.hungergames.SafeSounds;
 
+/**
+ * Kit that gives the user 5 exploding books that they can throw like a grenade when right clicking.
+ */
 public class libraryaddict extends AbilityListener implements Disableable {
     private static int i = 0;
     public String bookName = "Explosive Reading";

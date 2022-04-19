@@ -10,6 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Kit that repairs the users weapons, armor and tools while standing under the sun
+ */
 public class Flower extends AbilityListener implements Disableable {
     private int currentSecond = 0;
     public int repairsEveryWhatSecond = 5;

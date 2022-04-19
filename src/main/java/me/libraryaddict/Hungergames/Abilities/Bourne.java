@@ -8,6 +8,9 @@ import me.libraryaddict.Hungergames.Events.PlayerTrackEvent;
 import me.libraryaddict.Hungergames.Interfaces.Disableable;
 import me.libraryaddict.Hungergames.Types.AbilityListener;
 
+/**
+ * Kit that scrambles enemy players compasses when they get within 25 blocks of the user, aka Jason Bourne.
+ */
 public class Bourne extends AbilityListener implements Disableable {
     public int bourneRange = 15;
     public int compassModifier = 10;

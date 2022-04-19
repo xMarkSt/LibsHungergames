@@ -13,6 +13,9 @@ import me.libraryaddict.Hungergames.Types.AbilityListener;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 import me.libraryaddict.Hungergames.Types.Kit;
 
+/**
+ * Permissive gives the perms to the player while they are still alive
+ */
 public class Permissive extends AbilityListener implements Disableable {
     private HashMap<Player, PermissionAttachment> attachments = new HashMap<Player, PermissionAttachment>();
     public String[] kitPermissions = new String[] { "KitName Permission Permission Permission", "NoCheatBypass nocheat.bypass" };

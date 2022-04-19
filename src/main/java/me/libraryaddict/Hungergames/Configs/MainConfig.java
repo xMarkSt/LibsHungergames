@@ -60,7 +60,7 @@ public class MainConfig extends BaseConfig {
 
     private boolean displayUnusableKitsInSelector;
     /**
-     * Is the end disabled? I will change it in the servers config :3
+     * Is the end disabled? I will change it in the servers config
      */
     private boolean endDisabled = true;
 
@@ -152,7 +152,7 @@ public class MainConfig extends BaseConfig {
      */
     private boolean mushroomStewEnabled = false;
     /**
-     * Is the nether disabled? I will change it in the servers config :3
+     * Is the nether disabled? I will change it in the servers config
      */
     private boolean netherDisabled = true;
     /**

@@ -7,6 +7,9 @@ import me.libraryaddict.Hungergames.Interfaces.Disableable;
 import me.libraryaddict.Hungergames.Types.AbilityListener;
 import org.bukkit.event.EventHandler;
 
+/**
+ * Kit that gives the user a chance to explode on death.
+ */
 public class Creeper extends AbilityListener implements Disableable {
 
     public float baseExplosionStrength = 0.4F;

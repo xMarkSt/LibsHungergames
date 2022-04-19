@@ -22,6 +22,11 @@ import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import net.techcable.hungergames.SafeSounds;
 
+/**
+ * Kit that gives the user a nether star to make a quick escape.
+ * When the star is used, a scary noise is played. There is a weakness effect for the distance the user ran
+ * This only works when the user has been fighting another player.
+ */
 public class Herobrine extends AbilityListener implements Disableable {
     private transient HashMap<Player, Long> cooldown = new HashMap<Player, Long>();
     public String cooldownMessage = ChatColor.BLUE + "You may not use that yet! Wait %s seconds!";

@@ -11,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import me.libraryaddict.Hungergames.Interfaces.Disableable;
 import me.libraryaddict.Hungergames.Types.AbilityListener;
 
+/**
+ * Kit that gives the user 50% chance of the creeper dropping tnt.
+ */
 public class Bombtastic extends AbilityListener implements Disableable {
     public int maxTntDrop = 3;
     public int minTntDrop = 1;

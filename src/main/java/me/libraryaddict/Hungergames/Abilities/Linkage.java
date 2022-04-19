@@ -30,6 +30,11 @@ import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
 import net.techcable.hungergames.SafeSounds;
 
+/**
+ * Kit that gives the user two teleporters. When placed, they can teleport between them.
+ * Other people can also use the teleporters.
+ * If their teleporter is broken, it respawns back in their inventory.
+ */
 public class Linkage extends AbilityListener implements Disableable {
     private class Teleport {
         private List<Block> blocks = new ArrayList<Block>();

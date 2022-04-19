@@ -12,6 +12,9 @@ import org.bukkit.potion.PotionEffectType;
 
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
+/**
+ * Kit that gives players a Speed I buff during the day and a night vison buff at night.
+ */
 public class Ninja extends AbilityListener implements Disableable {
     public String[] potionEffectsDuringDay = new String[] { "SPEED 0" };
     public String[] potionEffectsDuringNight = new String[] { "NIGHT_VISION 0" };

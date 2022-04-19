@@ -12,6 +12,9 @@ import me.libraryaddict.Hungergames.Types.AbilityListener;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 import me.libraryaddict.Hungergames.Types.Kit;
 
+/**
+ * PotionLover is a ability that lets you add your own potions to a kit at the start of the game.
+ */
 public class PotionLover extends AbilityListener implements Disableable {
 
     public String[] potionEffects = new String[] { "Ghost INVISIBILITY 2600 0" };

@@ -11,6 +11,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
+/**
+ * Allows the user to be immune to fire and lava. However, water damages the user.
+ */
 public class Salamander extends AbilityListener implements Disableable {
 
     @EventHandler

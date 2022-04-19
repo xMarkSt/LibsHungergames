@@ -21,6 +21,9 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 
+/**
+ * Kit that lets the user turn into a zombie when sneaking
+ */
 public class Zombifier extends AbilityListener implements Disableable {
     public Zombifier() throws Exception {
         if (Bukkit.getPluginManager().getPlugin("LibsDisguises") == null)
@@ -38,13 +41,13 @@ public class Zombifier extends AbilityListener implements Disableable {
         try {
             oldSetItemStackMethod = MethodHandles.publicLookup().findVirtual(FlagWatcher.class, "setItemStack", MethodType.methodType(void.class, int.class, ItemStack.class));
         } catch (NoSuchMethodException | IllegalAccessException ignored) {
-            // We must be on a newer version :D
+            // We must be on a newer version
         }
         OLD_SET_ITEM_STACK_METHOD = oldSetItemStackMethod;
     }
 
     @EventHandler
-    @SneakyThrows // MethodHandle throws a checked exception -_-
+    @SneakyThrows // MethodHandle throws a checked exception
     public void onSneak(PlayerToggleSneakEvent event) {
         if (hasAbility(event.getPlayer())) {
             if (event.isSneaking()) {
@@ -53,7 +56,7 @@ public class Zombifier extends AbilityListener implements Disableable {
                 FlagWatcher watcher = disguise.getWatcher();
                 watcher.setSneaking(false);
                 if (OLD_SET_ITEM_STACK_METHOD == null) {
-                    // Yay, we're on a modern version!
+                    // We're on a modern version
                     watcher.setItemStack(EquipmentSlot.FEET, new ItemStack(Material.AIR));
                     watcher.setItemStack(EquipmentSlot.LEGS, new ItemStack(Material.AIR));
                     watcher.setItemStack(EquipmentSlot.CHEST, new ItemStack(Material.AIR));

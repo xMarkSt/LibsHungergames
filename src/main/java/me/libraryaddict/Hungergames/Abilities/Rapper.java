@@ -14,6 +14,10 @@ import me.libraryaddict.Hungergames.Interfaces.Disableable;
 import me.libraryaddict.Hungergames.Types.AbilityListener;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
+/**
+ * Kit that gives the user a note block and lets them right click on it to give everything in audible range nausea.
+ * The nausea doesn't stack and the user is affected by it too.
+ */
 public class Rapper extends AbilityListener implements Disableable {
     public int hearingRange = 16;
     public int nauseaLength = 7;

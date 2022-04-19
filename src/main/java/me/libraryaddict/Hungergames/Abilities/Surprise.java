@@ -15,6 +15,9 @@ import me.libraryaddict.Hungergames.Types.AbilityListener;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 import me.libraryaddict.Hungergames.Types.Kit;
 
+/**
+ * Kit that gives the user a random kit when the game starts, even if they don't own that kit
+ */
 public class Surprise extends AbilityListener implements Disableable {
     public String[] badKits = new String[] { "Surprise" };
     public String messageOnGive = ChatColor.BLUE + "You were given the kit %s!";
