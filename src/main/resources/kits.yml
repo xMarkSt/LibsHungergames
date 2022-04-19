@@ -24,7 +24,7 @@
 # SILK_TOUCH - Allows blocks to drop themselves instead of fragments (for example, stone instead of cobblestone)
 # WATER_WORKER - Increases the speed at which a player may mine underwater
 # THORNS - Damages the attacker
-# Unlootable - Marks a item to not drop when player is killed
+# VANISHING_CURSE - Marks a item to not drop when player is killed
 #
 #                   CUSTOM METADATA
 #
@@ -104,7 +104,7 @@ Kits:
     Price: 0
     Icon: NETHER_STAR 0 1
     Items:
-      - NETHER_STAR 0 1 Unlootable 1 Name=Herobrines_Escape
+      - NETHER_STAR 0 1 VANISHING_CURSE 1 Name=Herobrines_Escape
     Ability:
       - Herobrine  
   Icicles:
@@ -120,7 +120,7 @@ Kits:
     Price: 0
     Icon: BOOK 0 1
     Items:
-      - BOOK 0 5 Unlootable 1 Name=Explosive_Reading
+      - BOOK 0 5 VANISHING_CURSE 1 Name=Explosive_Reading
     Ability:
       - libraryaddict
       - ItemRegen
@@ -130,7 +130,7 @@ Kits:
     Price: 0
     Icon: SPAWNER 0 1
     Items: 
-      - SPAWNER 0 2 Unlootable 1 Name=Teleporter
+      - SPAWNER 0 2 VANISHING_CURSE 1 Name=Teleporter
     Ability:
       - Linkage
   Miser:
@@ -181,7 +181,7 @@ Kits:
     Price: 0
     Icon: MUSIC_DISC_13 0 1
     Items:
-      - 'NOTE_BLOCK 0 1 Name=Rapper''s_Studio Unlootable 1'
+      - 'NOTE_BLOCK 0 1 Name=Rapper''s_Studio VANISHING_CURSE 1'
     Ability:
       - Rapper
   Surprise:

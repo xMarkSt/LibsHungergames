@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 public class ItemRegen extends AbilityListener implements Disableable {
     public String[] itemsToRegen = new String[] {
             "FirstItemGivenAt SecondsBetweenItems KitName ItemType ItemDurability ItemAmount ItemData",
-            "300 300 libraryaddict BOOK 0 1 Unlootable 1 Name=Explosive_Reading" };
+            "300 300 libraryaddict BOOK 0 1 VANISHING_CURSE 1 Name=Explosive_Reading" };
 
     @EventHandler
     public void onExplode(TimeSecondEvent event) {

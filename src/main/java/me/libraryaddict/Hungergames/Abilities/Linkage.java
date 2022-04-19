@@ -10,6 +10,7 @@ import org.bukkit.Effect;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -98,7 +99,7 @@ public class Linkage extends AbilityListener implements Disableable {
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(teleporterName);
         item.setItemMeta(meta);
-        item.addEnchantment(EnchantmentManager.UNLOOTABLE, 1);
+        item.addEnchantment(Enchantment.VANISHING_CURSE, 1);
         EnchantmentManager.updateEnchants(item);
         p.getInventory().addItem(item);
     }

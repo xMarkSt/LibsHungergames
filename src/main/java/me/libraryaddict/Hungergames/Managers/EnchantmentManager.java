@@ -22,27 +22,20 @@ public class EnchantmentManager {
     private static final String[] RCODE = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
     public static Enchantment UNDROPPABLE;
-    public static Enchantment UNLOOTABLE;
 
     static {
-        UNLOOTABLE = new Unlootable();
         UNDROPPABLE = new Undroppable();
         try {
             Field field = Enchantment.class.getDeclaredField("acceptingNew");
             field.setAccessible(true);
-            field.setBoolean(EnchantmentManager.UNLOOTABLE, true);
         } catch (SecurityException e) {
             e.printStackTrace();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
         }
-        if (Enchantment.getByKey(UNLOOTABLE.getKey()) == null) {
-            Enchantment.registerEnchantment(UNLOOTABLE);
-            customEnchants.add(UNLOOTABLE.getKey());
+        if (Enchantment.getByKey(UNDROPPABLE.getKey()) == null) {
             Enchantment.registerEnchantment(UNDROPPABLE);
             customEnchants.add(UNDROPPABLE.getKey());
         }

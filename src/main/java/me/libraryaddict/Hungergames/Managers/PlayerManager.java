@@ -168,7 +168,7 @@ public class PlayerManager {
         killed.clearInventory();
         World world = p.getWorld();
         for (ItemStack item : event.getDrops()) {
-            if (item == null || item.getType() == Material.AIR || item.containsEnchantment(EnchantmentManager.UNLOOTABLE))
+            if (item == null || item.getType() == Material.AIR)
                 continue;
             else if (item.hasItemMeta())
                 world.dropItemNaturally(event.getDropsLocation(), item.clone()).getItemStack().setItemMeta(item.getItemMeta());
