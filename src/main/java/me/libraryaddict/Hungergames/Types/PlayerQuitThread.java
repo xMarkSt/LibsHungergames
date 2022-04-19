@@ -8,7 +8,7 @@ import me.libraryaddict.Hungergames.Configs.MySqlConfig;
 import me.libraryaddict.Hungergames.Managers.PlayerManager;
 
 public class PlayerQuitThread extends Thread {
-    private LoggerConfig cm = HungergamesApi.getConfigManager().getLoggerConfig();
+    private final LoggerConfig cm = HungergamesApi.getConfigManager().getLoggerConfig();
     private Connection con = null;
     private boolean uuids;
 
@@ -18,13 +18,13 @@ public class PlayerQuitThread extends Thread {
 
     public void mySqlConnect() {
         try {
-            System.out.println(String.format(cm.getMySqlConnecting(), getClass().getSimpleName()));
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
+            System.out.printf((cm.getMySqlConnecting()) + "%n", getClass().getSimpleName());
+            Class.forName("com.mysql.jdbc.Driver").getDeclaredConstructor().newInstance();
             MySqlConfig config = HungergamesApi.getConfigManager().getMySqlConfig();
             String conn = "jdbc:mysql://" + config.getMysql_host() + "/" + config.getMysql_database();
             con = DriverManager.getConnection(conn, config.getMysql_username(), config.getMysql_password());
         } catch (Exception ex) {
-            System.err.println(String.format(cm.getMySqlConnectingError(), getClass().getSimpleName(), ex.getMessage()));
+            System.err.printf((cm.getMySqlConnectingError()) + "%n", getClass().getSimpleName(), ex.getMessage());
         }
     }
 
@@ -32,10 +32,10 @@ public class PlayerQuitThread extends Thread {
         if (!HungergamesApi.getConfigManager().getMySqlConfig().isStatsEnabled())
             return;
         try {
-            System.out.println(String.format(cm.getMySqlClosing(), getClass().getSimpleName()));
+            System.out.printf((cm.getMySqlClosing()) + "%n", getClass().getSimpleName());
             this.con.close();
         } catch (Exception ex) {
-            System.err.println(String.format(cm.getMySqlClosingError(), getClass().getSimpleName()));
+            System.err.printf((cm.getMySqlClosingError()) + "%n", getClass().getSimpleName());
         }
     }
 
@@ -67,13 +67,13 @@ public class PlayerQuitThread extends Thread {
                     }
                     stmt.close();
                 } catch (Exception ex) {
-                    System.out.println(String.format(cm.getMySqlErrorSaveStats(), stats.getOwningPlayer(), ex.getMessage()));
+                    System.out.printf((cm.getMySqlErrorSaveStats()) + "%n", stats.getOwningPlayer(), ex.getMessage());
                 }
             }
             if (pm.saveGamer.peek() == null) {
                 try {
                     Thread.sleep(1000);
-                } catch (InterruptedException ie) {
+                } catch (InterruptedException ignored) {
                 }
             }
         }
