@@ -28,11 +28,14 @@ public class EnchantmentManager {
         try {
             Field field = Enchantment.class.getDeclaredField("acceptingNew");
             field.setAccessible(true);
+            field.setBoolean(EnchantmentManager.UNDROPPABLE,true);
         } catch (SecurityException e) {
             e.printStackTrace();
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
         if (Enchantment.getByKey(UNDROPPABLE.getKey()) == null) {
