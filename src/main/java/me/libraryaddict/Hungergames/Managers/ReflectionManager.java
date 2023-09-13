@@ -3,6 +3,7 @@ package me.libraryaddict.Hungergames.Managers;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,16 +23,35 @@ public class ReflectionManager
     private Object propertyManager;
     private Object serverSettings;
 
+    // region Variables that might need fixing when upgrading to new versions
+    private final String DedicatedServerSettingsFieldName = "u"; // DedicatedServerSettings
+    private final String DedicatedServerPropertiesMethodName = "a"; // DedicatedServerProperties
+    private final String PropertiesFieldName = "Y"; // Properties
+
+    // endregion
+
     public ReflectionManager()
     {
         try
         {
+            /*
+             * This code uses reflection to call various methods and fields from server code.
+             * When upgrading the plugin to work with a new Minecraft version,
+             * this code may break because the names of the methods and fields change.
+             * A way to fix it again is to print out the fields/methods in the console in order
+             * to get the correct names again.
+             * Example:
+             * for (Field f : propertyManager.getClass().getFields()) {
+             *  System.out.println(f.getType().getCanonicalName() + " " + f.getName());
+             * }
+             **/
+
             commandMap = (SimpleCommandMap) Bukkit.getServer().getClass().getDeclaredMethod("getCommandMap")
                     .invoke(Bukkit.getServer());
             Object obj = Bukkit.getServer().getClass().getDeclaredMethod("getServer").invoke(Bukkit.getServer());
-            serverSettings = obj.getClass().getField("y").get(obj); //DedicatedServerSettings
-            propertyManager = serverSettings.getClass().getDeclaredMethod("a").invoke(serverSettings); // DedicatedServerProperties
-            properties = (Properties) propertyManager.getClass().getField("Y").get(propertyManager); // Properties
+            serverSettings = obj.getClass().getField(DedicatedServerSettingsFieldName).get(obj); //DedicatedServerSettings
+            propertyManager = serverSettings.getClass().getDeclaredMethod(DedicatedServerPropertiesMethodName).invoke(serverSettings); // DedicatedServerProperties
+            properties = (Properties) propertyManager.getClass().getField(PropertiesFieldName).get(propertyManager); // Properties
             currentCraftBukkitVersion = Bukkit.getServer().getClass().getPackage().getName();
             currentVersion = currentCraftBukkitVersion.replace("org.bukkit.craftbukkit.", "net.minecraft.server.");
             itemClass = getCraftClass("inventory.CraftItemStack");
@@ -114,7 +134,7 @@ public class ReflectionManager
         {
             try
             {
-                properties = (Properties) propertyManager.getClass().getField("Y").get(propertyManager); // Properties
+                properties = (Properties) propertyManager.getClass().getField(PropertiesFieldName).get(propertyManager); // Properties
             }
             catch (Exception ex)
             {
