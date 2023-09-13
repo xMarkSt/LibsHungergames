@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import me.libraryaddict.Hungergames.Types.HungergamesApi;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;

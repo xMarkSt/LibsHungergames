@@ -1,6 +1,6 @@
 name: LibsHungergames
 main: me.libraryaddict.Hungergames.Hungergames
-author: libraryaddict
+authors: [libraryaddict, xMarkSt, FrankS01]
 version: ${project.version}
 website: https://github.com/xMarkSt/LibsHungergames
 load: STARTUP
